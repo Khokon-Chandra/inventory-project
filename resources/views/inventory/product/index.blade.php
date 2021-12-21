@@ -8,7 +8,7 @@
                <x-search-product :productTypes="$productTypes" :categories="$categories" />
 
                 <div class="d-flex">
-                    <a class="btn btn-success btn-sm" href="{{ route('inventory.product_types.create') }}">Add New</a>
+                    <a class="btn btn-success btn-sm" href="{{ route('inventory.products.create') }}">Add New</a>
                     <button id="delete" class="btn btn-danger btn-sm mx-1" value="{{ route('inventory.products.deleteMultiple') }}">Delete</button>
                 </div>
 

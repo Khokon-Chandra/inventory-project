@@ -29,7 +29,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $productType->name }}</td>
-                            <td>{{ Str::substr($productType->description, 0, 30) }}</td>
+                            <td>{{ Str::substr($productType->description, 0, 50) }}</td>
                             <td>{{ $productType->created_at->format('d-m-Y') }}</td>
                             <td class="text-center">
                                 <x-edit-action :action="route('inventory.product_types.edit', $productType->_key)" />
