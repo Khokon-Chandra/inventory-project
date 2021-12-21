@@ -26,10 +26,12 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('products', ProductController::class);
         Route::resource('product_types', ProductTypeController::class);
         Route::resource('categories', CategoryController::class);
+
+        Route::post('/product_types/delete-many',[ProductTypeController::class,'deleteMultiple'])->name('product_types.deleteMultiple');
+        Route::post('/categories/delete-many',[CategoryController::class,'deleteMultiple'])->name('categories.deleteMultiple');
+        Route::post('/products/delete-many',[ProductController::class,'deleteMultiple'])->name('products.deleteMultiple');
     });
 });
-
-
 
 
 

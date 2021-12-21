@@ -1,5 +1,5 @@
 <x-app-layout>
-    <h3>Product Type:</h3>
+    <h3>Product List:</h3>
     <x-alert />
     <div class="card">
         <div class="card-body">
@@ -8,19 +8,20 @@
                <x-search-product :productTypes="$productTypes" :categories="$categories" />
 
                 <div class="d-flex">
-                    <a class="btn btn-success btn-sm mx-1" href="{{ route('inventory.product_types.create') }}">Add New</a>
-                    <a class="btn btn-danger btn-sm mx-1" href="">Delete</a>
+                    <a class="btn btn-success btn-sm" href="{{ route('inventory.product_types.create') }}">Add New</a>
+                    <button id="delete" class="btn btn-danger btn-sm mx-1" value="{{ route('inventory.products.deleteMultiple') }}">Delete</button>
                 </div>
 
             </div>
-            <table class="table">
+            <table class="table table-sm table-striped">
                 <thead>
                     <tr class="bg-dark text-light">
-                        <th>SN</th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Date</th>
-                        <th class="text-center">Action <input type="checkbox"></th>
+                        <th width="5%">SN</th>
+                        <th width="20%">Name</th>
+                        <th width="30%">Description</th>
+                        <th width="10%">Date</th>
+                        <th width="10%" class="text-center">Action</th>
+                        <th width="5%"><input id="selectAll"  type="checkbox" value="false"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,8 +34,8 @@
                             <td class="text-center">
                                 <x-edit-action :action="route('inventory.products.edit', $product->_key)" />
                                 <x-delete-action :action="route('inventory.products.destroy', $product->_key)" />
-                                    <input type="checkbox" class="mx-2">
                             </td>
+                            <td> <input type="checkbox" value="{{ $product->_key }}"></td>
                         </tr>
                         @empty
                         <tr><td class="text-center" colspan="5">No record found</td></tr>

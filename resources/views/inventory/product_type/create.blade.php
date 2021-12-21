@@ -1,7 +1,7 @@
 <x-app-layout>
     <h3>Create New Product Type:</h3>
     <div class="mb-3">
-        <a href="{{ route('inventory.product_types.index') }}" class="btn btn-success">Go To List</a>
+        <a href="{{ route('inventory.product_types.index') }}" class="btn btn-dark">Go To List</a>
     </div>
     <x-alert />
     <div class="card ">

@@ -36,12 +36,5 @@ class ProductType extends Model
                 ->where('name', 'LIKE', '%'.$search.'%')
                 ->orWhere('description', 'LIKE', '%'.$search.'%');
         });
-
-        // $query->when($filters['roles'] ?? false, function ($query, $roles) {
-        //    $query
-        //        ->whereHas('roles', function ($query) use ($roles) {
-        //            $query->whereIn('slug', $roles);
-        //        });
-        // });
     }
 }

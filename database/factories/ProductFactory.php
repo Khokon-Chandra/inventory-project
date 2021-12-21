@@ -16,7 +16,7 @@ class ProductFactory extends Factory
     {
         return [
             '_key'=>rand(999999,99999999),
-            'category_id'=>Category::factory(),
+            'category_id'=>rand(1,50),
             'name'=>$this->faker->word,
             'description'=>$this->faker->paragraph(5),
         ];

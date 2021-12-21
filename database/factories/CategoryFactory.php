@@ -16,7 +16,7 @@ class CategoryFactory extends Factory
     {
         return [
             '_key'=>rand(999999,9999999999),
-            'product_type_id'=>ProductType::factory(),
+            'product_type_id'=>rand(1,20),
             'name'=>$this->faker->word,
             'description'=>$this->faker->paragraph,
         ];

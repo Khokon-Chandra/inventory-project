@@ -18,6 +18,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        // Category::withTrashed()->restore();
        return view('inventory.category.index',[
            'productTypes'=>ProductType::select('id','_key','name')->get(),
            'categories'=>Category::latest()->filter(request(['search','product_type']))->paginate(10),
@@ -115,4 +116,15 @@ class CategoryController extends Controller
             return back()->with('error','something went wrong Please Try again');
         }
     }
+
+
+    public function deleteMultiple(Request $request){
+        try{
+            Category::whereIn('_key',$request->data)->delete();
+            return response()->json(['data'=>$request->data,'code'=>200]);
+        }catch(\Execption $e){
+            return response()->json(['data'=>false,'code'=>500]);
+        }
+    }
+
 }

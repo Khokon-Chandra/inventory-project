@@ -37,7 +37,7 @@ class Category extends Model
         $query->when($filters['product_type'] ?? false, function ($query, $productType) {
             $query
                 ->whereHas('productType',function($query) use($productType){
-                    $query->whereColumn('_key',$productType);
+                    $query->where('_key',$productType);
                 });
         });
     }
@@ -49,7 +49,7 @@ class Category extends Model
     {
      $query
         ->whereHas('productType',function($query){
-            $query->where('id',request('product_type'));
+            $query->where('_key',request('product_type'));
         });
     }
 

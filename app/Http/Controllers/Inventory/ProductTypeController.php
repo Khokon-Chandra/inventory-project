@@ -19,7 +19,7 @@ class ProductTypeController extends Controller
      */
     public function index()
     {
-
+        // ProductType::withTrashed()->restore();
         return view('inventory.product_type.index', [
             'productTypes' => ProductType::latest()->filter(request(['search']))->paginate(10),
         ]);
@@ -112,5 +112,14 @@ class ProductTypeController extends Controller
         ProductType::where('_key', $_key)->delete();
         return redirect()->route('inventory.product_types.index')
         ->with('success', 'Successfullly product type deleted');
+    }
+
+    public function deleteMultiple(Request $request){
+        try{
+            ProductType::whereIn('_key',$request->data)->delete();
+            return response()->json(['data'=>$request->data,'code'=>200]);
+        }catch(\Execption $e){
+            return response()->json(['data'=>false,'code'=>500]);
+        }
     }
 }

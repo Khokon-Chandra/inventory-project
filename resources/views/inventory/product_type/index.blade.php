@@ -8,20 +8,20 @@
                <x-search-product-type />
 
                 <div class="d-flex">
-                    <a class="btn btn-success mx-1" href="{{ route('inventory.product_types.create') }}">Add New</a>
-                    <a class="btn btn-danger mx-1" href="">Delete</a>
+                    <a class="btn btn-primary mx-1" href="{{ route('inventory.product_types.create') }}">Add New</a>
+                    <button id="delete" class="btn btn-danger mx-1" value="{{ route('inventory.product_types.deleteMultiple') }}">Delete</button>
                 </div>
 
             </div>
-            <table class="table">
+            <table class="table table-sm table-striped">
                 <thead>
                     <tr class="bg-dark text-white">
-                        <th>SN</th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Date</th>
-                        <th class="text-center">Action</th>
-                        <th></th>
+                        <th width="5%">SN</th>
+                        <th width="20%">Name</th>
+                        <th width="30%">Description</th>
+                        <th width="10%">Date</th>
+                        <th width="10%" class="text-center">Action </th>
+                        <th width="5%"><input id="selectAll"  type="checkbox" value="false"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -34,9 +34,8 @@
                             <td class="text-center">
                                 <x-edit-action :action="route('inventory.product_types.edit', $productType->_key)" />
                                 <x-delete-action :action="route('inventory.product_types.destroy', $productType->_key)" />
-                                    <input type="checkbox" class="mx-2">
                             </td>
-
+                            <td> <input type="checkbox" value="{{ $productType->_key }}"></td>
                         </tr>
                     @endforeach
                 </tbody>

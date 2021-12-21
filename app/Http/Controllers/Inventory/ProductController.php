@@ -20,7 +20,7 @@ class ProductController extends Controller
     public function index()
     {
 
-
+        // Product::withTrashed()->restore();
        return view('inventory.product.index',[
            'productTypes'=>ProductType::select('id','_key','name')->get(),
            'categories'=>Category::categoryFilter()->get(),
@@ -37,7 +37,7 @@ class ProductController extends Controller
     {
         return view('inventory.product.create',[
             'productTypes'=>ProductType::select('id','_key','name')->get(),
-            'categories'=>Category::select('id','_key','name')->get(),
+            'categories'=>Category::categoryFilter()->get(),
             'products'=>Product::latest()->paginate(10),
         ]);
     }
@@ -122,4 +122,16 @@ class ProductController extends Controller
             return back('error','Something went wrong Please try again');
         }
     }
+
+
+    public function deleteMultiple(Request $request){
+        try{
+            Product::whereIn('_key',$request->data)->delete();
+            return response()->json(['data'=>$request->data,'code'=>200]);
+        }catch(\Execption $e){
+            return response()->json(['data'=>false,'code'=>500]);
+        }
+    }
+
+
 }

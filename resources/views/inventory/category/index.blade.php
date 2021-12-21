@@ -1,5 +1,5 @@
 <x-app-layout>
-    <h3>Product Type:</h3>
+    <h3>Category List:</h3>
     <x-alert />
     <div class="card">
         <div class="card-body">
@@ -8,19 +8,20 @@
                <x-search-category :productTypes="$productTypes" />
 
                 <div class="d-flex">
-                    <a class="btn btn-success mx-1" href="{{ route('inventory.categories.create') }}">Add New</a>
-                    <a class="btn btn-danger mx-1" href="">Delete</a>
+                    <a class="btn btn-primary btn-sm mx-1" href="{{ route('inventory.categories.create') }}">Add New</a>
+                    <button id="delete" class="btn btn-danger btn-sm mx-1" value="{{ route('inventory.categories.deleteMultiple') }}">Delete</button>
                 </div>
 
             </div>
-            <table class="table">
+            <table class="table table-sm table-striped">
                 <thead>
                     <tr class="bg-dark text-white">
-                        <th>SN</th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Date</th>
-                        <th class="text-center">Action <input type="checkbox"></th>
+                        <th width="5%">SN</th>
+                        <th width="20%">Name</th>
+                        <th width="30%">Description</th>
+                        <th width="10%">Date</th>
+                        <th width="10%" class="text-center">Action</th>
+                        <th width="5%"><input id="selectAll"  type="checkbox" value="false"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,8 +34,8 @@
                         <td class="text-center">
                             <x-edit-action :action="route('inventory.categories.edit', $category->_key)" />
                             <x-delete-action :action="route('inventory.categories.destroy', $category->_key)" />
-                                <input type="checkbox" class="mx-2">
                         </td>
+                        <td> <input type="checkbox" value="{{ $category->_key }}"></td>
 
                     </tr>
                     @empty
