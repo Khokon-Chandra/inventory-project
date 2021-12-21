@@ -27,6 +27,14 @@
                 </x-slot>
             </x-dropdown>
 
+            <x-dropdown :trigger="__('Agents')" :active="__('agents')" :id="__('agents')" :icon="__('aperture')">
+                <x-slot name="content">
+                    <x-dropdown-link :href="route('agents.index')" :active="request()->routeIs('agents.index')">{{ __('Agent List') }}</x-dropdown-link>
+                    <x-dropdown-link :href="route('agents.create')" :active="request()->routeIs('agents.create')">{{ __('Add New Agent') }}</x-dropdown-link>
+
+                </x-slot>
+            </x-dropdown>
+
 
             <li class="sidebar-header">
                 Tools & Components

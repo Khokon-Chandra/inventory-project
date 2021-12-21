@@ -13,7 +13,7 @@ class StoreAgentRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,13 @@ class StoreAgentRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            '_key'=>'required',
+            'type'=>'required|min:5|max:6',
+            'name'=>'required',
+            'fathers_name'=>'required',
+            'address'=>'required',
+            'mobile'=>'required',
+            'rate_of_interest'=>'required|integer',
         ];
     }
 }

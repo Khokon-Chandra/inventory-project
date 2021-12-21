@@ -4,9 +4,7 @@
     <div class="card">
         <div class="card-body">
             <div class="d-flex justify-content-between mb-3">
-
-               <x-search-product-type />
-
+                <x-search-product-type />
                 <div class="d-flex">
                     <a class="btn btn-primary mx-1" href="{{ route('inventory.product_types.create') }}">Add New</a>
                     <button id="delete" class="btn btn-danger mx-1" value="{{ route('inventory.product_types.deleteMultiple') }}">Delete</button>

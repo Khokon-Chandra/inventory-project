@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AgentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Inventory\CategoryController;
 use App\Http\Controllers\Inventory\ProductController;
@@ -30,7 +31,13 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/product_types/delete-many',[ProductTypeController::class,'deleteMultiple'])->name('product_types.deleteMultiple');
         Route::post('/categories/delete-many',[CategoryController::class,'deleteMultiple'])->name('categories.deleteMultiple');
         Route::post('/products/delete-many',[ProductController::class,'deleteMultiple'])->name('products.deleteMultiple');
+
     });
+    /**
+     * agent modiule route goes here
+     */
+    Route::resource('agents', AgentController::class);
+    Route::post('/agents/delete-many',[AgentController::class,'deleteMultiple'])->name('agents.deleteMultiple');
 });
 
 

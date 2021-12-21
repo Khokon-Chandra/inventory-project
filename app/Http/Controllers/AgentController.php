@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Agent;
+use App\Models\Agent\Agent;
 use App\Http\Requests\StoreAgentRequest;
 use App\Http\Requests\UpdateAgentRequest;
 
@@ -15,7 +15,9 @@ class AgentController extends Controller
      */
     public function index()
     {
-        //
+        return view('agent.index',[
+            'agents'=>Agent::latest()->paginate(10),
+        ]);
     }
 
     /**
@@ -25,7 +27,7 @@ class AgentController extends Controller
      */
     public function create()
     {
-        //
+        return view('agent.create');
     }
 
     /**
@@ -36,13 +38,16 @@ class AgentController extends Controller
      */
     public function store(StoreAgentRequest $request)
     {
-        //
+        $attributes = $request->validated();
+        // dd($attributes);
+        Agent::create($attributes);
+        return redirect()->route('agents.index')->with('success','Successfully Agent created');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Agent  $agent
+     * @param  \App\Models\Agent\Agent  $agent
      * @return \Illuminate\Http\Response
      */
     public function show(Agent $agent)
@@ -53,7 +58,7 @@ class AgentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Agent  $agent
+     * @param  \App\Models\Agent\Agent  $agent
      * @return \Illuminate\Http\Response
      */
     public function edit(Agent $agent)
@@ -65,7 +70,7 @@ class AgentController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateAgentRequest  $request
-     * @param  \App\Models\Agent  $agent
+     * @param  \App\Models\Agent\Agent  $agent
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateAgentRequest $request, Agent $agent)
@@ -76,11 +81,16 @@ class AgentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Agent  $agent
+     * @param  \App\Models\Agent\Agent  $agent
      * @return \Illuminate\Http\Response
      */
     public function destroy(Agent $agent)
     {
         //
+    }
+
+    public function deleteMultiple()
+    {
+        return true;
     }
 }
