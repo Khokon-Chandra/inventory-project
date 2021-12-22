@@ -27,7 +27,7 @@
                 <tbody>
                     @forelse ($products as $product)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
+                            <x-sn :iteration="$loop->iteration" />
                             <td>{{ $product->name }}</td>
                             <td>{{ Str::substr($product->description, 0, 30) }}</td>
                             <td>{{ $product->created_at->format('d-m-Y') }}</td>
