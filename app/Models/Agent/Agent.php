@@ -21,4 +21,15 @@ class Agent extends Model
         'rate_of_interest',
         'discount_per_bag',
     ];
+
+    public function scopeFilter($query, $filters)
+    {
+        $query->when($filters['search']??false,function($query,$search){
+            $query
+            ->where('name', 'LIKE', '%'.$search.'%')
+                ->orWhere('fathers_name', 'LIKE', '%'.$search.'%')
+                    ->orWhere('address', 'LIKE', '%'.$search.'%');
+        });
+    }
+
 }

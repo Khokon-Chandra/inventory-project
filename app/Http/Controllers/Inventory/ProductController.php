@@ -19,7 +19,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-
+    //    Product::whereHas('productType')->with('productType')->get()->toArray();
         // Product::withTrashed()->restore();
         return view('inventory.product.index', [
             'productTypes' => ProductType::select('id', '_key', 'name')->get(),

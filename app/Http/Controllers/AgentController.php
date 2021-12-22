@@ -6,6 +6,7 @@ use App\Models\Agent\Agent;
 use App\Http\Requests\StoreAgentRequest;
 use App\Http\Requests\UpdateAgentRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class AgentController extends Controller
@@ -18,7 +19,7 @@ class AgentController extends Controller
     public function index()
     {
         return view('agent.index', [
-            'agents' => Agent::latest()->paginate(10),
+            'agents' => Agent::latest()->filter(request(['search']))->paginate(10),
         ]);
     }
 
@@ -41,8 +42,14 @@ class AgentController extends Controller
 
     public function store(StoreAgentRequest $request)
     {
+
         try {
-            Agent::create($request->validated());
+            $exception = DB::transaction(function () use ($request) {
+                Agent::create($request->validated());
+            });
+            if ($exception === false) {
+                throw new \Exception('Some thing went wrong, Please try again!!');
+            }
             return redirect()->route('agents.index')->with('success', 'Successfully Agent created');
         } catch (\Exception $e) {
             return back()->with('error', $e->getMessage());
