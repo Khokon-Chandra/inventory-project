@@ -1,8 +1,6 @@
 @props(['name','label','type','data'])
 <div  {{ $attributes->merge(['class' => 'mb-3']) }}>
     <label for="{{ $name }}">{{ $label }}</label>
-    <input type="{{ $type??'text' }}" id="{{ $name }}" name="{{ $name }}"
-    value="{{ $data->{$name}??'' }}"
-    class="form-control @error($name) is-invalid @enderror" >
+    <textarea name="{{ $name }}" id="{{ $name }}" rows="5"  class="form-control @error($name) is-invalid @enderror" >{{ $data->{$name}??'' }}</textarea>
     <x-invalid-feedback attribute="{{ $name }}" />
 </div>

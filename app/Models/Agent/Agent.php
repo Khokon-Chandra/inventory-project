@@ -19,5 +19,6 @@ class Agent extends Model
         'address',
         'mobile',
         'rate_of_interest',
+        'discount_per_bag',
     ];
 }

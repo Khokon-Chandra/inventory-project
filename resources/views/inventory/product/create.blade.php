@@ -24,7 +24,7 @@
 
                 <div class="mb-3">
                     <label for="category_id">Choose Category</label>
-                    <select name="category_id" id="category_id" class="form-control">
+                    <select name="category_id" id="category_id" class="form-control @error('category_id') is-invalid @enderror">
                         <option value="">Select Category</option>
                         @forelse ($categories as $category)
                             <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -36,16 +36,10 @@
                 </div>
                 {{-- Category selection section end --}}
 
-                <div class="mb-3">
-                    <label for="name">Product Name</label>
-                    <input type="text" id="name" name="name" class="form-control">
-                    <x-invalid-feedback attribute="name" />
-                </div>
-                <div class="mb-3">
-                    <label for="description">Product Description</label>
-                    <textarea name="description" id="description" rows="5" class="form-control"></textarea>
-                    <x-invalid-feedback attribute="description" />
-                </div>
+                <x-input-field :name="__('name')" :label="__('Product Name')" />
+
+                <x-textarea :name="__('description')" :label="__('Product Description')" />
+
                 <div class="mb-3 text-right">
                     <input type="submit" class="btn btn-primary" value="Save">
                 </div>

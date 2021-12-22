@@ -31,6 +31,10 @@ class StoreAgentRequest extends FormRequest
             'address'=>'required',
             'mobile'=>'required',
             'rate_of_interest'=>'required|integer',
+            'discount_per_bag'=>'required|integer',
         ];
     }
+
+
+
 }

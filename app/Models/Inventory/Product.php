@@ -9,7 +9,7 @@ use \Znck\Eloquent\Traits\BelongsToThrough;
 
 class Product extends Model
 {
-    use HasFactory,SoftDeletes,BelongsToThrough;
+    use HasFactory, SoftDeletes, BelongsToThrough;
 
     protected $fillable = [
         '_key',
@@ -25,27 +25,31 @@ class Product extends Model
 
     public function productType()
     {
-        return $this->belongsToThrough(ProductType::class,Category::class);
+        return $this->belongsToThrough(ProductType::class, Category::class);
     }
 
-    public function scopeFilter ( $query, array $filters)
+
+    /**
+     * Product Search Filter  method
+     * Query Scope method
+     */
+
+    public function scopeFilter($query, array $filters)
     {
-        $query->when($filters['search'] ?? false, function ($query, $search){
+        $query->when($filters['search'] ?? false, function ($query, $search) {
             $query
-                ->where('name', 'LIKE', '%'.$search.'%')
-                ->orWhere('description', 'LIKE', '%'.$search.'%');
+                ->where('name', 'LIKE', '%' . $search . '%')
+                ->orWhere('description', 'LIKE', '%' . $search . '%');
         });
 
         $query->when($filters['category'] ?? false, function ($query, $category) {
             $query
-                ->whereHas('category',function($query) use($category){
-                    $query->where('_key',$category);
+                ->whereHas('category', function ($query) use ($category) {
+                    $query->where('_key', $category);
                 });
         });
-
-
-
     }
+
 
 
 

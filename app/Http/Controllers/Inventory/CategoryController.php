@@ -52,7 +52,7 @@ class CategoryController extends Controller
             return redirect()->route('inventory.categories.index')
             ->with('success','Successfully category created!!');
         }catch(\Exeception $e){
-            return back()->with('error','Something went wrong, Please try again!!');
+            return back()->with('error', $e->getMessage());
         }
 
     }
@@ -93,10 +93,11 @@ class CategoryController extends Controller
     {
         try{
             Category::where('_key',$_key)->update($request->validated());
-            return redirect()->route('inventory.categories.index')->with('success','Successfully Category Updated s!!');
+            return redirect()->route('inventory.categories.index')
+            ->with('success','Successfully Category Updated s!!');
         }
         catch(\Exception $e){
-            return back()->with('error','something went wrong Please try again');
+            return back()->with('error', $e->getMessage());
         }
     }
 
@@ -113,7 +114,7 @@ class CategoryController extends Controller
             return redirect()->route('inventory.categories.index')
             ->with('success', 'Successfullly category deleted');
         }catch(\Exception $e){
-            return back()->with('error','something went wrong Please Try again');
+            return back()->with('error', $e->getMessage());
         }
     }
 
@@ -123,7 +124,7 @@ class CategoryController extends Controller
             Category::whereIn('_key',$request->data)->delete();
             return response()->json(['data'=>$request->data,'code'=>200]);
         }catch(\Execption $e){
-            return response()->json(['data'=>false,'code'=>500]);
+            return response()->json(['data'=>$e->getMessage(),'code'=>500]);
         }
     }
 

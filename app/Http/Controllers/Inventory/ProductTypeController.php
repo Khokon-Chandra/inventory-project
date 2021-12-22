@@ -51,7 +51,7 @@ class ProductTypeController extends Controller
             return redirect()->route('inventory.product_types.index')
             ->with('success', 'Successfully Product Type created !!');
         } catch (\Exception $e) {
-            return back()->with('error', 'Something went wrong, Please Try arain !!');
+            return back()->with('error', $e->getMessage());
         }
 
     }
@@ -96,7 +96,7 @@ class ProductTypeController extends Controller
             return redirect()->route('inventory.product_types.index')
             ->with('success', 'Successfuly product type updated');
         } catch (\Execption $e) {
-            return back()->with('error', 'Something went wrong, Please try again!!');
+            return back()->with('error', $e->getMessage());
         }
 
     }
@@ -109,9 +109,15 @@ class ProductTypeController extends Controller
      */
     public function destroy($_key)
     {
-        ProductType::where('_key', $_key)->delete();
-        return redirect()->route('inventory.product_types.index')
-        ->with('success', 'Successfullly product type deleted');
+        try{
+            ProductType::where('_key', $_key)->delete();
+            return redirect()->route('inventory.product_types.index')
+            ->with('success', 'Successfullly product type deleted');
+        }catch(\Execption $e){
+            return response()->json(['data'=>$e->getMessage(),'code'=>500]);
+        }
+
+
     }
 
     public function deleteMultiple(Request $request){
@@ -119,7 +125,7 @@ class ProductTypeController extends Controller
             ProductType::whereIn('_key',$request->data)->delete();
             return response()->json(['data'=>$request->data,'code'=>200]);
         }catch(\Execption $e){
-            return response()->json(['data'=>false,'code'=>500]);
+            return response()->json(['data'=>$e->getMessage(),'code'=>500]);
         }
     }
 }
