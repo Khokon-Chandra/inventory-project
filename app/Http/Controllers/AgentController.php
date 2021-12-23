@@ -4,13 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreAgentRequest;
 use App\Http\Requests\UpdateAgentRequest;
-<<<<<<< HEAD
 use App\Models\Agent\Agent;
-=======
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
->>>>>>> 6f6006519716e0d2a35983ccf3dd728a46a56917
 
 class AgentController extends Controller
 {
@@ -22,11 +19,8 @@ class AgentController extends Controller
     public function index()
     {
         return view('agent.index', [
-<<<<<<< HEAD
             'agents' => Agent::latest()->paginate(10),
-=======
             'agents' => Agent::latest()->filter(request(['search']))->paginate(10),
->>>>>>> 6f6006519716e0d2a35983ccf3dd728a46a56917
         ]);
     }
 
@@ -49,12 +43,6 @@ class AgentController extends Controller
 
     public function store(StoreAgentRequest $request)
     {
-<<<<<<< HEAD
-        $attributes = $request->validated();
-        // dd($attributes);
-        Agent::create($attributes);
-        return redirect()->route('agents.index')->with('success', 'Successfully Agent created');
-=======
 
         try {
             $exception = DB::transaction(function () use ($request) {
@@ -67,7 +55,6 @@ class AgentController extends Controller
         } catch (\Exception $e) {
             return back()->with('error', $e->getMessage());
         }
->>>>>>> 6f6006519716e0d2a35983ccf3dd728a46a56917
     }
 
     /**
