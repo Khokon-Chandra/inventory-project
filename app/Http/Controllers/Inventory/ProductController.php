@@ -55,13 +55,8 @@ class ProductController extends Controller
             $attribute['_key'] = Str::random(32);
             Product::create($attribute);
             return redirect()->route('inventory.products.index')->with('success', 'successfully product created');
-<<<<<<< HEAD
-        } catch (\Exeception$e) {
-            return back('error', 'Something went wrong Please try again');
-=======
         } catch (\Exeception $e) {
             return back()->with('error', $e->getMessage());
->>>>>>> 6f6006519716e0d2a35983ccf3dd728a46a56917
         }
     }
 
@@ -84,21 +79,10 @@ class ProductController extends Controller
      */
     public function edit($_key)
     {
-<<<<<<< HEAD
-        try {
-            return view('inventory.product.edit', [
-                'categories' => Category::select('id', '_key', 'name')->get(),
-                'product' => Product::where('_key', $_key)->firstOrFail(),
-            ]);
-        } catch (\Execption$e) {
-            return back()->with('error', 'Something went wrong Please try again');
-        }
-=======
         return view('inventory.product.edit', [
             'categories' => Category::select('id', '_key', 'name')->get(),
             'product' => Product::where('_key', $_key)->firstOrFail(),
         ]);
->>>>>>> 6f6006519716e0d2a35983ccf3dd728a46a56917
     }
 
     /**
@@ -112,16 +96,10 @@ class ProductController extends Controller
     {
         try {
             Product::where('_key', $_key)->update($request->validated());
-<<<<<<< HEAD
-            return redirect()->route('inventory.products.index')->with('success', 'successfully product Updated');
-        } catch (\Exeception$e) {
-            return back('error', 'Something went wrong Please try again');
-=======
             return redirect()->route('inventory.products.index')
             ->with('success', 'successfully product Updated');
         } catch (\Exeception $e) {
             return back()->with('error', $e->getMessage());
->>>>>>> 6f6006519716e0d2a35983ccf3dd728a46a56917
         }
     }
 
@@ -136,35 +114,19 @@ class ProductController extends Controller
         try {
             Product::where('_key', $_key)->delete();
             return redirect()->route('inventory.products.index')->with('success', 'successfully product Deleted');
-<<<<<<< HEAD
-        } catch (\Exeception$e) {
-            return back('error', 'Something went wrong Please try again');
-        }
-    }
-
-=======
         } catch (\Exeception $e) {
             return back()->with('error', $e->getMessage());
         }
     }
 
 
->>>>>>> 6f6006519716e0d2a35983ccf3dd728a46a56917
     public function deleteMultiple(Request $request)
     {
         try {
             Product::whereIn('_key', $request->data)->delete();
             return response()->json(['data' => $request->data, 'code' => 200]);
-<<<<<<< HEAD
-        } catch (\Execption$e) {
-            return response()->json(['data' => false, 'code' => 500]);
-        }
-    }
-
-=======
         } catch (\Execption $e) {
             return response()->json(['data' => $e->getMessage(), 'code' => 500]);
         }
     }
->>>>>>> 6f6006519716e0d2a35983ccf3dd728a46a56917
 }
