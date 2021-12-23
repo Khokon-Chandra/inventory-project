@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Agent\Agent;
 use App\Http\Requests\StoreAgentRequest;
 use App\Http\Requests\UpdateAgentRequest;
+use App\Models\Agent\Agent;
 
 class AgentController extends Controller
 {
@@ -15,8 +15,8 @@ class AgentController extends Controller
      */
     public function index()
     {
-        return view('agent.index',[
-            'agents'=>Agent::latest()->paginate(10),
+        return view('agent.index', [
+            'agents' => Agent::latest()->paginate(10),
         ]);
     }
 
@@ -41,7 +41,7 @@ class AgentController extends Controller
         $attributes = $request->validated();
         // dd($attributes);
         Agent::create($attributes);
-        return redirect()->route('agents.index')->with('success','Successfully Agent created');
+        return redirect()->route('agents.index')->with('success', 'Successfully Agent created');
     }
 
     /**

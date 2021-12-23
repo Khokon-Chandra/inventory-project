@@ -5,11 +5,13 @@
         <div class="card-body">
             <div class="d-flex justify-content-between mb-3">
 
-               <x-search-category :productTypes="$productTypes" />
+                <x-search-category :productTypes="$productTypes" />
 
                 <div class="d-flex">
-                    <a class="btn btn-primary btn-sm mx-1" href="{{ route('inventory.categories.create') }}">Add New</a>
-                    <button id="delete" class="btn btn-danger btn-sm mx-1" value="{{ route('inventory.categories.deleteMultiple') }}">Delete</button>
+                    <a class="btn btn-primary btn-sm mx-1" href="{{ route('inventory.categories.create') }}">Add
+                        New</a>
+                    <button id="delete" class="btn btn-danger btn-sm mx-1"
+                        value="{{ route('inventory.categories.deleteMultiple') }}">Delete</button>
                 </div>
 
             </div>
@@ -21,23 +23,23 @@
                         <th width="30%">Description</th>
                         <th width="10%">Date</th>
                         <th width="10%" class="text-center">Action</th>
-                        <th width="5%"><input id="selectAll"  type="checkbox" value="false"></th>
+                        <th width="5%"><input id="selectAll" type="checkbox" value="false"></th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse ($categories as $category)
-                    <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $category->name }}</td>
-                        <td>{{ Str::substr($category->description, 0, 30) }}</td>
-                        <td>{{ $category->created_at->format('d-m-Y') }}</td>
-                        <td class="text-center">
-                            <x-edit-action :action="route('inventory.categories.edit', $category->_key)" />
-                            <x-delete-action :action="route('inventory.categories.destroy', $category->_key)" />
-                        </td>
-                        <td> <input type="checkbox" value="{{ $category->_key }}"></td>
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $category->name }}</td>
+                            <td>{{ Str::substr($category->description, 0, 30) }}</td>
+                            <td>{{ $category->created_at->format('d-m-Y') }}</td>
+                            <td class="text-center">
+                                <x-edit-action :action="route('inventory.categories.edit', $category->_key)" />
+                                <x-delete-action :action="route('inventory.categories.destroy', $category->_key)" />
+                            </td>
+                            <td> <input type="checkbox" value="{{ $category->_key }}"></td>
 
-                    </tr>
+                        </tr>
                     @empty
                         <tr>
                             <td class="text-center" colspan="5">No records found</td>
