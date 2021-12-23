@@ -4,7 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreAgentRequest;
 use App\Http\Requests\UpdateAgentRequest;
+<<<<<<< HEAD
 use App\Models\Agent\Agent;
+=======
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+>>>>>>> 6f6006519716e0d2a35983ccf3dd728a46a56917
 
 class AgentController extends Controller
 {
@@ -16,7 +22,11 @@ class AgentController extends Controller
     public function index()
     {
         return view('agent.index', [
+<<<<<<< HEAD
             'agents' => Agent::latest()->paginate(10),
+=======
+            'agents' => Agent::latest()->filter(request(['search']))->paginate(10),
+>>>>>>> 6f6006519716e0d2a35983ccf3dd728a46a56917
         ]);
     }
 
@@ -36,12 +46,28 @@ class AgentController extends Controller
      * @param  \App\Http\Requests\StoreAgentRequest  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(StoreAgentRequest $request)
     {
+<<<<<<< HEAD
         $attributes = $request->validated();
         // dd($attributes);
         Agent::create($attributes);
         return redirect()->route('agents.index')->with('success', 'Successfully Agent created');
+=======
+
+        try {
+            $exception = DB::transaction(function () use ($request) {
+                Agent::create($request->validated());
+            });
+            if ($exception === false) {
+                throw new \Exception('Some thing went wrong, Please try again!!');
+            }
+            return redirect()->route('agents.index')->with('success', 'Successfully Agent created');
+        } catch (\Exception $e) {
+            return back()->with('error', $e->getMessage());
+        }
+>>>>>>> 6f6006519716e0d2a35983ccf3dd728a46a56917
     }
 
     /**
@@ -61,9 +87,11 @@ class AgentController extends Controller
      * @param  \App\Models\Agent\Agent  $agent
      * @return \Illuminate\Http\Response
      */
-    public function edit(Agent $agent)
+    public function edit($_key)
     {
-        //
+        return view('agent.edit', [
+            'agent' => Agent::where('_key', $_key)->firstOrFail(),
+        ]);
     }
 
     /**
@@ -73,9 +101,14 @@ class AgentController extends Controller
      * @param  \App\Models\Agent\Agent  $agent
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateAgentRequest $request, Agent $agent)
+    public function update(UpdateAgentRequest $request, $_key)
     {
-        //
+        try {
+            Agent::where('_key', $_key)->update($request->validated());
+            return redirect()->route('agents.index')->with('success', 'Successfully Updated an item');
+        } catch (NotFoundHttpException $e) {
+            return back()->with('error', $e->getMessage());
+        }
     }
 
     /**

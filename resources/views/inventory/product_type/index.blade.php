@@ -23,7 +23,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($productTypes as $productType)
+                    @forelse ($productTypes as $productType)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $productType->name }}</td>
@@ -35,7 +35,9 @@
                             </td>
                             <td> <input type="checkbox" value="{{ $productType->_key }}"></td>
                         </tr>
-                    @endforeach
+                        @empty
+                        <tr><td colspan="6" class="text-center">No records found</td></tr>
+                    @endforelse
                 </tbody>
             </table>
 

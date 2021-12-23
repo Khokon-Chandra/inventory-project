@@ -32,17 +32,19 @@ $(document).ready(function () {
             }
         });
 
-        console.log(keys);
-        axios.post(url, { data: keys })
-            .then((response) => {
-                if (response.status == 200) {
-                    toastr.success('Successfully Deleted !!');
-                    location.reload();
-                    console.log(response.data);
-                }
-            }).catch((error) => {
-                toastr.error('Deletation faild,Please try again');
-            });
+
+        if (keys.length > 0) {
+            axios.post(url, { data: keys })
+                .then((response) => {
+                    if (response.status == 200) {
+                        toastr.success('Successfully Deleted !!');
+                        location.reload();
+                        console.log(response.data);
+                    }
+                }).catch((error) => {
+                    toastr.error('Deletation faild,Please try again');
+                });
+        }
     });
 
 })

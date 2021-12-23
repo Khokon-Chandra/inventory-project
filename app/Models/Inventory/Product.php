@@ -9,7 +9,7 @@ use \Znck\Eloquent\Traits\BelongsToThrough;
 
 class Product extends Model
 {
-    use HasFactory,SoftDeletes,BelongsToThrough;
+    use HasFactory, SoftDeletes, BelongsToThrough;
 
     protected $fillable = [
         '_key',
@@ -25,31 +25,48 @@ class Product extends Model
 
     public function productType()
     {
-        return $this->belongsToThrough(ProductType::class,Category::class);
+        return $this->belongsToThrough(ProductType::class, Category::class);
     }
 
-    public function scopeFilter ( $query, array $filters)
+
+    /**
+     * Product Search Filter  method
+     * Query Scope method
+     */
+
+    public function scopeFilter($query, array $filters)
     {
-        $query->when($filters['search'] ?? false, function ($query, $search){
-            $query
-                ->where('name', 'LIKE', '%'.$search.'%')
-                ->orWhere('description', 'LIKE', '%'.$search.'%');
-        });
 
-        $query->when($filters['category'] ?? false, function ($query, $category) {
+        if (isset($filters['category']) && isset($filters['search'])) {
+            $category = $filters['category'];
             $query
-                ->whereHas('category',function($query) use($category){
-                    $query->where('_key',$category);
+                ->whereHas('category', function ($query) use ($category) {
+                    $query->where('_key', $category);
+                })
+                ->where('name', 'LIKE', '%' . $filters['search'] . '%')
+                ->orWhere('description', 'LIKE', '%' . $filters['search'] . '%');
+
+        } else {
+
+            $query
+                ->when($filters['product_type'] ?? false, function ($query, $productType) {
+                    $query->whereHas('category', function ($query) use ($productType) {
+                        $query->whereHas('productType', function ($query) use ($productType) {
+                            $query->where('_key', $productType);
+                        });
+                    });
+                })
+                ->when($filters['category'] ?? false, function ($query, $category) {
+                    $query
+                        ->whereHas('category', function ($query) use ($category) {
+                            $query->where('_key', $category);
+                        });
+                })
+                ->when($filters['search'] ?? false, function ($query, $search) {
+                    $query
+                        ->where('name', 'LIKE', '%' . $search . '%')
+                        ->orWhere('description', 'LIKE', '%' . $search . '%');
                 });
-        });
-
-
-
+        }
     }
-
-
-
-
-
-
 }
