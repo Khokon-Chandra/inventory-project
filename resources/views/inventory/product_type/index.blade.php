@@ -30,8 +30,7 @@
                             <td>{{ Str::substr($productType->description, 0, 50) }}</td>
                             <td>{{ $productType->created_at->format('d-m-Y') }}</td>
                             <td class="text-center">
-                                <x-edit-action :action="route('inventory.product_types.edit', $productType->_key)" />
-                                <x-delete-action :action="route('inventory.product_types.destroy', $productType->_key)" />
+                               <a class="btn btn-primary btn-sm" href="{{ route('inventory.product_types.edit', $productType->_key) }}">Edit</a>
                             </td>
                             <td> <input type="checkbox" value="{{ $productType->_key }}"></td>
                         </tr>
