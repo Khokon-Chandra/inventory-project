@@ -1,9 +1,11 @@
-@props(['name','label','data','valueType','editableData'])
+@props(['name','label','data','valueType','editableData','optionLabel'])
 
-<div {{ $attributes->merge(["class"=>"mb-3"]) }}>
-    <label for="{{ $name }}">{{ $label }}</label>
+<div {{ $attributes->merge(["class"=>""]) }}>
+   @isset($label)
+   <label for="{{ $name }}">{{ $label }}</label>
+   @endisset
     <select id="{{ $name }}" name="{{ $name }}" class="form-control @error($name) is-invalid @enderror" >
-        <option value="">Select an item</option>
+        <option value="">{{ $optionLabel??'Select an item' }}</option>
         @foreach ($data as $item)
             <option
             {{ request($name)? 'selected':'' }}
