@@ -18,6 +18,7 @@
                     <tr class="bg-dark text-light">
                         <th width="5%">SN</th>
                         <th width="20%">Name</th>
+                        <th with="20%">Category Name</th>
                         <th width="30%">Description</th>
                         <th width="10%">Date</th>
                         <th width="10%" class="text-center">Action</th>
@@ -29,11 +30,11 @@
                         <tr>
                             <x-sn :iteration="$loop->iteration" />
                             <td>{{ $product->name }}</td>
+                            <td>{{ $product->category->name }}</td>
                             <td>{{ Str::substr($product->description, 0, 30) }}</td>
                             <td>{{ $product->created_at->format('d-m-Y') }}</td>
                             <td class="text-center">
-                                <x-edit-action :action="route('inventory.products.edit', $product->_key)" />
-                                <x-delete-action :action="route('inventory.products.destroy', $product->_key)" />
+                                <a class="btn btn-primary btn-sm" href="{{ route('inventory.products.edit', $product->_key) }}">Edit</a>
                             </td>
                             <td> <input type="checkbox" value="{{ $product->_key }}"></td>
                         </tr>

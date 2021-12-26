@@ -24,7 +24,9 @@ class ProductController extends Controller
         return view('inventory.product.index', [
             'productTypes' => ProductType::select('id', '_key', 'name')->get(),
             'categories' => Category::categoryFilter()->get(),
-            'products' => Product::latest()->filter(request(['product_type', 'category', 'search']))->paginate(10),
+            'products' => Product::with(['category'=>function($query){
+                $query->select('id','name');
+            }])->latest()->filter(request(['product_type', 'category', 'search']))->paginate(10),
         ]);
     }
 

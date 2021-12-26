@@ -28,16 +28,15 @@
                 </thead>
                 <tbody>
                     @forelse ($categories as $category)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $category->name }}</td>
-                            <td>{{ Str::substr($category->description, 0, 30) }}</td>
-                            <td>{{ $category->created_at->format('d-m-Y') }}</td>
-                            <td class="text-center">
-                                <x-edit-action :action="route('inventory.categories.edit', $category->_key)" />
-                                <x-delete-action :action="route('inventory.categories.destroy', $category->_key)" />
-                            </td>
-                            <td> <input type="checkbox" value="{{ $category->_key }}"></td>
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $category->name }}</td>
+                        <td>{{ Str::substr($category->description, 0, 30) }}</td>
+                        <td>{{ $category->created_at->format('d-m-Y') }}</td>
+                        <td class="text-center">
+                            <a class="btn btn-primary btn-sm" href="{{ route('inventory.categories.edit', $category->_key) }}">Edit</a>
+                        </td>
+                        <td> <input type="checkbox" value="{{ $category->_key }}"></td>
 
                         </tr>
                     @empty

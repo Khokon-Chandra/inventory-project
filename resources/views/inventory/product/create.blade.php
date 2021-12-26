@@ -16,7 +16,9 @@
                     <select id="productType" name="product_type" class="form-control">
                         <option value="">Product Type</option>
                         @foreach ($productTypes as $productType)
-                            <option value="{{ $productType->_key }}">{{ $productType->name }}</option>
+                            <option
+                            {{ request('product_type')? 'selected':'' }}
+                             value="{{ $productType->_key }}">{{ $productType->name }}</option>
                         @endforeach
                     </select>
                 </div>

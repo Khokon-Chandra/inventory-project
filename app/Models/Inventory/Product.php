@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use \Znck\Eloquent\Traits\BelongsToThrough;
 
-class  Product extends Model
+class Product extends Model
 {
     use HasFactory, SoftDeletes, BelongsToThrough;
 
@@ -28,7 +28,6 @@ class  Product extends Model
         return $this->belongsToThrough(ProductType::class, Category::class);
     }
 
-
     /**
      * Product Search Filter  method
      * Query Scope method
@@ -39,11 +38,15 @@ class  Product extends Model
 
         if (isset($filters['category']) && isset($filters['search'])) {
             $category = $filters['category'];
+            $search = $filters['search'];
             $query
-            ->where('name', 'LIKE', '%' . $filters['search'] . '%')
-            ->orWhere('description', 'LIKE', '%' . $filters['search'] . '%')
                 ->whereHas('category', function ($query) use ($category) {
                     $query->where('_key', $category);
+                })
+                ->where(function ($query) use($search){
+                    $query
+                        ->where('name', 'LIKE', '%' . $search . '%')
+                        ->orWhere('description', 'LIKE', '%' .$search . '%');
                 });
 
         } else {
