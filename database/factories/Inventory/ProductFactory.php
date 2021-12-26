@@ -23,6 +23,11 @@ class ProductFactory extends Factory
             'category_id'=>rand(1,50),
             'name'=>$this->faker->word,
             'description'=>$this->faker->paragraph(5),
+            'unit_price'=>rand(100,9999),
+            'import_price'=> rand(99999,99999999),
+            'quantity'=>rand(10,999),
+            'discount'=>rand(0,100),
         ];
     }
 }
+

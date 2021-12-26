@@ -16,6 +16,10 @@ class Product extends Model
         'category_id',
         'name',
         'description',
+        'unit_price',
+        'import_price',
+        'quantity',
+        'discount',
     ];
 
     public function category()
@@ -28,7 +32,6 @@ class Product extends Model
         return $this->belongsToThrough(ProductType::class, Category::class);
     }
 
-
     /**
      * Product Search Filter  method
      * Query Scope method
@@ -39,13 +42,16 @@ class Product extends Model
 
         if (isset($filters['category']) && isset($filters['search'])) {
             $category = $filters['category'];
+            $search = $filters['search'];
             $query
                 ->whereHas('category', function ($query) use ($category) {
                     $query->where('_key', $category);
                 })
-                ->where('name', 'LIKE', '%' . $filters['search'] . '%')
-                ->orWhere('description', 'LIKE', '%' . $filters['search'] . '%');
-
+                ->where(function ($query) use ($search) {
+                    $query
+                        ->where('name', 'LIKE', '%' . $search . '%')
+                        ->orWhere('description', 'LIKE', '%' . $search . '%');
+                });
         } else {
 
             $query

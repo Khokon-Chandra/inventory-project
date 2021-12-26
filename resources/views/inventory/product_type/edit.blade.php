@@ -1,11 +1,10 @@
 <x-app-layout>
-    <h3>Create New Product Type:</h3>
-    <div class="mb-3">
-        <a href="{{ route('inventory.product_types.index') }}" class="btn btn-success">Go To List</a>
-    </div>
+
     <x-alert />
+   <div class="col-md-6 offset-md-3">
     <div class="card ">
-        <div class="card-body col-md-6 offset-md-3">
+        <h4 class="card-header bg-primary text-white">Edit Product type:</h4>
+        <div class="card-body">
             <form action="{{ route('inventory.product_types.update',$productType->_key) }}" method="POST">
                 @csrf
                 @method('PUT')
@@ -19,10 +18,11 @@
                     <textarea name="description" id="description" rows="5" class="form-control">{{ $productType->description }}</textarea>
                     <x-invalid-feedback attribute="description" />
                 </div>
-                <div class="mb-3 text-right">
-                    <input type="submit" class="btn btn-primary" value="Save">
+                <div class="mb-3 text-center">
+                    <input type="submit" class="btn btn-primary" value="Update Product Type">
                 </div>
             </form>
         </div>
     </div>
+   </div>
 </x-app-layout>

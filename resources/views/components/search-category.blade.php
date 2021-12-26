@@ -1,7 +1,7 @@
 @props(['productTypes'])
 <form class="row" method="GET" action="{{ route('inventory.categories.index') }}">
     <div class="col-md-4 pr-0">
-        <select id="productType" name="product_type" class="form-control form-control-sm">
+        <select id="productType" name="product_type" class="form-control">
             <option value="">Product Type</option>
             @foreach ($productTypes as $productType)
                 <option
@@ -10,13 +10,14 @@
             @endforeach
         </select>
     </div>
+
     <div class="col-4 px-0"><input type="search"
         name="search"
         value="{{ request('search') }}"
-        class="form-control form-control-sm"
+        class="form-control"
         placeholder="search here"></div>
     <div class="col-4 px-0">
-        <input type="submit" value="search" class="btn btn-dark btn-sm">
+        <input type="submit" value="search" class="btn btn-outline-primary">
     </div>
 </form>
 

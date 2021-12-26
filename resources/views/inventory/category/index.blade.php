@@ -8,14 +8,14 @@
                <x-search-category :productTypes="$productTypes" />
 
                 <div class="d-flex">
-                    <a class="btn btn-primary btn-sm mx-1" href="{{ route('inventory.categories.create') }}">Add New</a>
-                    <button id="delete" class="btn btn-danger btn-sm mx-1" value="{{ route('inventory.categories.deleteMultiple') }}">Delete</button>
+                    <a class="btn btn-primary mx-1" href="{{ route('inventory.categories.create') }}"><i class="fas fa-plus"></i> New category</a>
+                    <button id="delete" class="btn btn-danger mx-1" value="{{ route('inventory.categories.deleteMultiple') }}">Delete</button>
                 </div>
 
             </div>
             <table class="table table-sm table-striped">
                 <thead>
-                    <tr class="bg-dark text-white">
+                    <tr>
                         <th width="5%">SN</th>
                         <th width="20%">Name</th>
                         <th width="30%">Description</th>
@@ -32,7 +32,7 @@
                         <td>{{ Str::substr($category->description, 0, 30) }}</td>
                         <td>{{ $category->created_at->format('d-m-Y') }}</td>
                         <td class="text-center">
-                            <a class="btn btn-primary btn-sm" href="{{ route('inventory.categories.edit', $category->_key) }}">Edit</a>
+                            <a class="btn btn-primary btn-sm" href="{{ route('inventory.categories.edit', $category->_key) }}"><i class="align-middle me-2 far fa-fw fa-edit"></i> Edit</a>
                         </td>
                         <td> <input type="checkbox" value="{{ $category->_key }}"></td>
 
