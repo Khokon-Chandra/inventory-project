@@ -9,6 +9,7 @@ use App\Models\Inventory\ProductType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Psr\Container\NotFoundExceptionInterface;
+use Yajra\DataTables\DataTables;
 
 class ProductTypeController extends Controller
 {
@@ -17,9 +18,10 @@ class ProductTypeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        // ProductType::withTrashed()->restore();
+
+        //   ProductType::withTrashed()->restore();
         return view('inventory.product_type.index', [
             'productTypes' => ProductType::latest()->filter(request(['search']))->paginate(10),
         ]);

@@ -11,7 +11,7 @@
                 </div>
 
             </div>
-            <table class="table table-sm table-striped">
+            <table id="product_types" class="table table-sm table-striped">
                 <thead>
                     <tr>
                         <th width="5%">SN</th>
@@ -40,8 +40,9 @@
                 </tbody>
             </table>
 
-            {{ $productTypes->links() }}
+            {{-- {{ $productTypes->links() }} --}}
 
         </div>
     </div>
+
 </x-app-layout>

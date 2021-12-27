@@ -2,7 +2,7 @@
     <x-alert />
     <div class="col-md-8 offset-md-2">
         <div class="card">
-            <h3 class="card-header bg-primary text-white">Create New Product</h3>
+            <h3 class="card-header bg-primary text-white">Edit Product</h3>
             <div class="card-body ">
                 <p class="text-dark"><i><small>Hints :First select Product type and then select Category Name
                             !</small></i></p>
@@ -36,7 +36,7 @@
                     <x-textarea :name="__('description')" :data="$product" :label="__('Product Description')" />
 
                     <div class="mb-3 text-center">
-                        <input type="submit" class="btn btn-primary" value="Save Product">
+                        <input type="submit" class="btn btn-primary" value="Update Product">
                     </div>
                 </form>
             </div>

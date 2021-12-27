@@ -43,7 +43,7 @@
                             <td> <input type="checkbox" value="{{ $product->_key }}"></td>
                         </tr>
                         @empty
-                        <tr><td class="text-center" colspan="5">No record found</td></tr>
+                        <tr><td class="text-center" colspan="9">No record found</td></tr>
                     @endforelse
                 </tbody>
             </table>

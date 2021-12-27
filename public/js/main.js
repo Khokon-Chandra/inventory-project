@@ -2,17 +2,35 @@ $(document).ready(function () {
     /**
      * select all checkbox by single button
      */
+    // $('#delete').attr('disabled',true);
+
+    const isSelected = () => {
+        $.each($('tbody').find($(':checkbox')), function (index, value) {
+            if ($(value).prop('checked')) {
+                return true;
+            }
+        });
+        return false;
+    }
+
+
     $('#selectAll').click(function () {
         var checkboxs = $(this).parents('.table').find($(':checkbox'));
-        $.each(checkboxs, function (index, value) {
-            if ($(value).val() !== 'false') {
-                if ($(value).prop('checked') == false && $(value).val()) {
-                    $(value).prop('checked', true);
-                } else {
+        if ($(this).is(':checked')) {
+            $.each(checkboxs, function (index, value) {
+                if ($(value).val() !== 'false') {
+                    if ($(value).prop('checked') == false && $(value).val()) {
+                        $(value).prop('checked', true);
+                    }
+                }
+            })
+        } else {
+            $.each(checkboxs, function (index, value) {
+                if ($(value).val() !== 'false') {
                     $(value).prop('checked', false);
                 }
-            }
-        })
+            })
+        }
     })
     /**
      * checkbox selector end here.....
@@ -31,7 +49,6 @@ $(document).ready(function () {
                 keys[index] = $(value).val();
             }
         });
-
 
         if (keys.length > 0) {
             axios.post(url, { data: keys })

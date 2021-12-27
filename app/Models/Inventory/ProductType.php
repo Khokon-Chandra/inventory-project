@@ -15,6 +15,8 @@ class ProductType extends Model
         'description',
     ];
 
+    protected static $relations_to_cascade = ['categories'];
+
     public function categories()
     {
         return $this->hasMany(Category::class);
@@ -37,4 +39,22 @@ class ProductType extends Model
                 ->orWhere('description', 'LIKE', '%'.$search.'%');
         });
     }
+
+
+
+
+    public static function boot ()
+    {
+        parent::boot();
+
+        self::deleting(function (ProductType $parent) {
+            foreach ($parent->categories as $child){
+                $child->delete();
+            }
+
+        });
+    }
+
+
+
 }
