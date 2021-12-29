@@ -16,6 +16,10 @@ class Product extends Model
         'category_id',
         'name',
         'description',
+        'unit_price',
+        'import_price',
+        'quantity',
+        'discount',
     ];
 
     public function category()
@@ -43,12 +47,11 @@ class Product extends Model
                 ->whereHas('category', function ($query) use ($category) {
                     $query->where('_key', $category);
                 })
-                ->where(function ($query) use($search){
+                ->where(function ($query) use ($search) {
                     $query
                         ->where('name', 'LIKE', '%' . $search . '%')
-                        ->orWhere('description', 'LIKE', '%' .$search . '%');
+                        ->orWhere('description', 'LIKE', '%' . $search . '%');
                 });
-
         } else {
 
             $query

@@ -29,7 +29,7 @@ class Category extends Model
     public function scopeFilter($query, array $filters)
     {
 
-        if (isset($filters['product_type']) && isset($filters['search']) ) {
+        if (isset($filters['product_type']) && isset($filters['search'])) {
             $query->whereHas('productType', function ($query) {
                 $query->where('_key', request('product_type'));
             })
@@ -49,9 +49,7 @@ class Category extends Model
                         $query->where('_key', $productType);
                     });
             });
-
         }
-
     }
 
     public function scopeCategoryFilter($query)
@@ -61,5 +59,4 @@ class Category extends Model
                 $query->where('_key', request('product_type'));
             });
     }
-
 }

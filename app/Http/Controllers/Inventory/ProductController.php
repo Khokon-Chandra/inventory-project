@@ -19,10 +19,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-    //    Product::whereHas('productType')->with('productType')->get()->toArray();
+        // Product::whereHas('productType')->with('productType')->get()->toArray();
         // Product::withTrashed()->restore();
         return view('inventory.product.index', [
-            'productTypes' => ProductType::select('id', '_key', 'name')->get(),
+            'productTypes' => ProductType::select('id', '_key', 'name')->whereHas('products')->get(),
             'categories' => Category::categoryFilter()->get(),
             'products' => Product::with(['category'=>function($query){
                 $query->select('id','name');
@@ -82,6 +82,7 @@ class ProductController extends Controller
     public function edit($_key)
     {
         return view('inventory.product.edit', [
+            'productTypes'=>ProductType::select('id','_key','name')->get(),
             'categories' => Category::select('id', '_key', 'name')->get(),
             'product' => Product::where('_key', $_key)->firstOrFail(),
         ]);

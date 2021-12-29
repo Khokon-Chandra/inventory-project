@@ -6,14 +6,14 @@
             <div class="d-flex justify-content-between mb-3">
                 <x-search-product-type />
                 <div class="d-flex">
-                    <a class="btn btn-primary mx-1" href="{{ route('inventory.product_types.create') }}">Add New</a>
-                    <button id="delete" class="btn btn-danger mx-1" value="{{ route('inventory.product_types.deleteMultiple') }}">Delete</button>
+                    <a href="{{ route('inventory.product_types.create') }}" class="btn btn-primary "><i class="fas fa-plus"></i> New Type</a>
+                    <button id="delete" class="btn btn-danger btn-sm mx-1" value="{{ route('inventory.product_types.deleteMultiple') }}">Delete</button>
                 </div>
 
             </div>
-            <table class="table table-sm table-striped">
+            <table id="product_types" class="table table-sm table-striped">
                 <thead>
-                    <tr class="bg-dark text-white">
+                    <tr>
                         <th width="5%">SN</th>
                         <th width="20%">Name</th>
                         <th width="30%">Description</th>
@@ -30,7 +30,7 @@
                             <td>{{ Str::substr($productType->description, 0, 50) }}</td>
                             <td>{{ $productType->created_at->format('d-m-Y') }}</td>
                             <td class="text-center">
-                               <a class="btn btn-primary btn-sm" href="{{ route('inventory.product_types.edit', $productType->_key) }}">Edit</a>
+                                <a class="btn btn-primary btn-sm" href="{{ route('inventory.product_types.edit',$productType->_key) }}"><i class="align-middle me-2 far fa-fw fa-edit"></i> Edit</a>
                             </td>
                             <td> <input type="checkbox" value="{{ $productType->_key }}"></td>
                         </tr>
@@ -40,8 +40,9 @@
                 </tbody>
             </table>
 
-            {{ $productTypes->links() }}
+            {{-- {{ $productTypes->links() }} --}}
 
         </div>
     </div>
+
 </x-app-layout>

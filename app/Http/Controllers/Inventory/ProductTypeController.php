@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Inventory;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\StoreProductTypeRequest;
 use App\Models\Inventory\Product;
 use App\Models\Inventory\ProductType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Psr\Container\NotFoundExceptionInterface;
+use Yajra\DataTables\DataTables;
 
 class ProductTypeController extends Controller
 {
@@ -17,9 +19,10 @@ class ProductTypeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        // ProductType::withTrashed()->restore();
+
+        //   ProductType::withTrashed()->restore();
         return view('inventory.product_type.index', [
             'productTypes' => ProductType::latest()->filter(request(['search']))->paginate(10),
         ]);
@@ -49,11 +52,48 @@ class ProductTypeController extends Controller
             $attribute['_key'] = Str::random(32);
             ProductType::create($attribute);
             return redirect()->route('inventory.product_types.index')
-            ->with('success', 'Successfully Product Type created !!');
+                ->with('success', 'Successfully Product Type created !!');
         } catch (\Exception $e) {
             return back()->with('error', $e->getMessage());
         }
+    }
 
+
+    /**
+     * @param Nothing Null
+     */
+
+    public function createMultiple()
+    {
+        return view('inventory.product_type.create-multiple');
+    }
+
+
+    /**
+     * @param Array response
+     * @return xmlHTTPResponse
+     */
+
+    public function storeMultiple(Request $request)
+    {
+
+        try {
+            $data = [];
+            for ($i = 0; $i < count($request->name); $i++) {
+                $data[] = [
+                    '_key'=> Str::random(32),
+                    'name' => $request->name[$i],
+                    'description' => $request->description[$i],
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ];
+            }
+
+            ProductType::insert($data);
+            return response()->json('Successfully Data inserted', 200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(), 500);
+        }
     }
 
     /**
@@ -64,7 +104,7 @@ class ProductTypeController extends Controller
      */
     public function show($id)
     {
-        //
+        return redirect()->back();
     }
 
     /**
@@ -94,11 +134,10 @@ class ProductTypeController extends Controller
         try {
             ProductType::where('_key', $_key)->update($request->validated());
             return redirect()->route('inventory.product_types.index')
-            ->with('success', 'Successfuly product type updated');
+                ->with('success', 'Successfuly product type updated');
         } catch (\Execption $e) {
             return back()->with('error', $e->getMessage());
         }
-
     }
 
     /**
@@ -109,23 +148,22 @@ class ProductTypeController extends Controller
      */
     public function destroy($_key)
     {
-        try{
+        try {
             ProductType::where('_key', $_key)->delete();
             return redirect()->route('inventory.product_types.index')
-            ->with('success', 'Successfullly product type deleted');
-        }catch(\Execption $e){
-            return response()->json(['data'=>$e->getMessage(),'code'=>500]);
+                ->with('success', 'Successfullly product type deleted');
+        } catch (\Execption $e) {
+            return response()->json(['data' => $e->getMessage(), 'code' => 500]);
         }
-
-
     }
 
-    public function deleteMultiple(Request $request){
-        try{
-            ProductType::whereIn('_key',$request->data)->delete();
-            return response()->json(['data'=>$request->data,'code'=>200]);
-        }catch(\Execption $e){
-            return response()->json(['data'=>$e->getMessage(),'code'=>500]);
+    public function deleteMultiple(Request $request)
+    {
+        try {
+            ProductType::whereIn('_key', $request->data)->delete();
+            return response()->json(['data' => $request->data, 'code' => 200]);
+        } catch (\Execption $e) {
+            return response()->json(['data' => $e->getMessage(), 'code' => 500]);
         }
     }
 }
