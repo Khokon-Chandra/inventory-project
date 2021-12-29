@@ -51,7 +51,6 @@ class ProductType extends Model
             foreach ($parent->categories as $child){
                 $child->delete();
             }
-
         });
     }
 

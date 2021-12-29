@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ProductTypeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+Route::apiResource('/product_types',ProductTypeController::class);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

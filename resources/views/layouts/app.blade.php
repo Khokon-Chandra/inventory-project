@@ -7,8 +7,8 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
         <link rel="shortcut icon" href="{{ asset('img/icons/icon-48x48.png') }}" />
-        <link rel="stylesheet" href="{{ asset('css/jquery.dataTables.min.css') }}">
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}" rel="stylesheet">
         <script src="{{ asset('js/jquery-3.5.1.js') }}"></script>
@@ -34,6 +34,7 @@
 		</div>
 	</div>
 
+    <script src="{{ asset('js/bootstrap-select.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/toastr.min.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
     @stack('scripts')

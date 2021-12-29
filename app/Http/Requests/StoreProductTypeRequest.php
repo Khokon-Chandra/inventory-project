@@ -25,7 +25,9 @@ class StoreProductTypeRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'description' => 'required',
+            'description' => 'nullable',
         ];
     }
+
+
 }

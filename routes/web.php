@@ -18,10 +18,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::middleware(['auth'])->group(function () {
     //dashboard route goes here
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-
     // module name : inventory // Route group for inventory module
     Route::prefix('inventory')->name('inventory.')->group(function () {
         Route::resource('products', ProductController::class);
