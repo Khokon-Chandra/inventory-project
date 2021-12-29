@@ -7,12 +7,12 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
+        <link rel="stylesheet" href="{{ asset('css/bootstrap-select.min.css') }}">
         <link rel="shortcut icon" href="{{ asset('img/icons/icon-48x48.png') }}" />
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}" rel="stylesheet">
         <script src="{{ asset('js/jquery-3.5.1.js') }}"></script>
-        <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
+
 
         <script src="{{ asset('js/app.js') }}"></script>
 

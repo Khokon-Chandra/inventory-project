@@ -17,7 +17,8 @@
                 <thead>
                     <tr>
                         <th width="5%">SN</th>
-                        <th width="20%">Name</th>
+                        <th>Product Type</th>
+                        <th width="20%">Category Name</th>
                         <th width="30%">Description</th>
                         <th width="10%">Date</th>
                         <th width="10%" class="text-center">Action</th>
@@ -28,6 +29,7 @@
                     @forelse ($categories as $category)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
+                        <th>{{ $category->productType->name }}</th>
                         <td>{{ $category->name }}</td>
                         <td>{{ Str::substr($category->description, 0, 30) }}</td>
                         <td>{{ $category->created_at->format('d-m-Y') }}</td>

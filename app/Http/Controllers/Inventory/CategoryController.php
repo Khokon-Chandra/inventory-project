@@ -21,7 +21,9 @@ class CategoryController extends Controller
         // Category::withTrashed()->restore();
        return view('inventory.category.index',[
            'productTypes'=>ProductType::select('id','_key','name')->get(),
-           'categories'=>Category::latest()->filter(request(['search','product_type']))->paginate(10),
+           'categories'=>Category::with(['productType'=>function($query){
+               $query->select('id','name');
+           }])->latest()->filter(request(['search','product_type']))->paginate(10),
        ]);
     }
 

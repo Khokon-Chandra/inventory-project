@@ -25,9 +25,14 @@ Route::middleware(['auth'])->group(function () {
     // module name : inventory // Route group for inventory module
     Route::prefix('inventory')->name('inventory.')->group(function () {
         Route::resource('products', ProductController::class);
-        Route::resource('product_types', ProductTypeController::class);
+        Route::resource('product_types', ProductTypeController::class)->except('show');
         Route::resource('categories', CategoryController::class);
 
+        //insert multiple data
+
+        Route::get('product_types/multiple/create',[ProductTypeController::class,'createMultiple'])->name('product_types.multiple.create');
+        Route::post('product_types/multiple/store',[ProductTypeController::class,'storeMultiple'])->name('product_types.multiple.store');
+        // delete multiple data
         Route::post('/product_types/delete-many',[ProductTypeController::class,'deleteMultiple'])->name('product_types.deleteMultiple');
         Route::post('/categories/delete-many',[CategoryController::class,'deleteMultiple'])->name('categories.deleteMultiple');
         Route::post('/products/delete-many',[ProductController::class,'deleteMultiple'])->name('products.deleteMultiple');
