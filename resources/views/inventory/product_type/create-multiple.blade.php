@@ -28,4 +28,5 @@
             </div>
         </div>
     </div>
+    <script>const data = { name: [], description: [] };</script>
 </x-app-layout>

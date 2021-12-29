@@ -94,7 +94,6 @@ $(document).ready(function () {
 
     $('#insertMultiple').submit(function (event) {
         event.preventDefault();
-        const data = { name: [], description: [] };
         this.elements.forEach(item => {
             if(item.hasAttribute('name')){
                 const attribute = item.getAttribute('name').trim();

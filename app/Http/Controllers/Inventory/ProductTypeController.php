@@ -84,6 +84,8 @@ class ProductTypeController extends Controller
                     '_key'=> Str::random(32),
                     'name' => $request->name[$i],
                     'description' => $request->description[$i],
+                    'created_at' => now(),
+                    'updated_at' => now(),
                 ];
             }
 

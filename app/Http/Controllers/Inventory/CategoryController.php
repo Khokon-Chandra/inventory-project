@@ -60,6 +60,17 @@ class CategoryController extends Controller
     }
 
     /**
+     * Create multiple Data
+     */
+
+    public function createMultiple()
+    {
+        return view('inventory.category.create-multiple',[
+            'productTypes'=>ProductType::select('id','_key','name')->get(),
+        ]);
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  int  $id
