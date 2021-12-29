@@ -52,11 +52,11 @@ class Category extends Model
         }
     }
 
-    public function scopeCategoryFilter($query,$filter)
+    public function scopeCategoryFilter($query)
     {
         $query
-            ->whereHas('productType', function ($query) use($filter) {
-                $query->where('_key', $filter);
+            ->whereHas('productType', function ($query) {
+                $query->where('_key', request('product_type'));
             });
     }
 }

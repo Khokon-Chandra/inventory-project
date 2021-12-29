@@ -23,7 +23,7 @@ class ProductController extends Controller
         // Product::withTrashed()->restore();
         return view('inventory.product.index', [
             'productTypes' => ProductType::select('id', '_key', 'name')->whereHas('products')->get(),
-            'categories' => Category::categoryFilter(request('product_type'))->get(),
+            'categories' => Category::categoryFilter()->get(),
             'products' => Product::with(['category'=>function($query){
                 $query->select('id','name');
             }])->latest()->filter(request(['product_type', 'category', 'search']))->paginate(10),

@@ -26,7 +26,11 @@ class StoreProductRequest extends FormRequest
         return [
             'category_id'=>'required|integer',
             'name'=>'required',
-            'description'=>'nullable'
+            'unit_price'=>'required|integer',
+            'import_price'=>'required|integer',
+            'quantity'=>'required|integer',
+            'discount'=>'required|integer',
+            'description'=>'nullable',
         ];
     }
 }

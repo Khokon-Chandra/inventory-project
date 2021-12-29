@@ -5,7 +5,7 @@
         :data="$productTypes" />
 
     <x-select class="col-md-3 px-0" :optionLabel="__('Select Category')" :name="__('category')" :valueType="__('_key')"
-        :data="$productTypes" />
+        :data="$categories" />
 
     <div class="col-3 px-0"><input type="search" name="search" value="{{ request('search') }}"
             class="form-control " placeholder="search here"></div>
