@@ -1,4 +1,12 @@
 <x-app-layout>
+<<<<<<< HEAD
+
+    <div class="mb-3 d-flex justify-content-between">
+        <h3>Create New Category:</h3>
+        <a href="{{ route('inventory.categories.index') }}" class="btn btn-dark d-block">Go To List</a>
+    </div>
+=======
+>>>>>>> f140de1b3a4eec932e5cd3cabe651c7ba1f554c2
     <x-alert />
     <div class="col-md-6 offset-md-3">
         <div class="card">

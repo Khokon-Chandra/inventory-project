@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Agent\Agent;
 use App\Http\Requests\StoreAgentRequest;
 use App\Http\Requests\UpdateAgentRequest;
+use App\Models\Agent\Agent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -19,6 +19,7 @@ class AgentController extends Controller
     public function index()
     {
         return view('agent.index', [
+            'agents' => Agent::latest()->paginate(10),
             'agents' => Agent::latest()->filter(request(['search']))->paginate(10),
         ]);
     }

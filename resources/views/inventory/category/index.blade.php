@@ -5,7 +5,7 @@
         <div class="card-body">
             <div class="d-flex justify-content-between mb-3">
 
-               <x-search-category :productTypes="$productTypes" />
+                <x-search-category :productTypes="$productTypes" />
 
                 <div class="d-flex">
                     <x-add-new-dropdown :label="__('New Category')" :single="route('inventory.categories.create')" :multiple="route('inventory.categories.multiple.create')" />
@@ -22,7 +22,7 @@
                         <th width="30%">Description</th>
                         <th width="10%">Date</th>
                         <th width="10%" class="text-center">Action</th>
-                        <th width="5%"><input id="selectAll"  type="checkbox" value="false"></th>
+                        <th width="5%"><input id="selectAll" type="checkbox" value="false"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -38,7 +38,7 @@
                         </td>
                         <td> <input type="checkbox" value="{{ $category->_key }}"></td>
 
-                    </tr>
+                        </tr>
                     @empty
                         <tr>
                             <td class="text-center" colspan="5">No records found</td>
