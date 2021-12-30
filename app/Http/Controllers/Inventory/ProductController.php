@@ -97,7 +97,6 @@ class ProductController extends Controller
 
     public function storeMultiple(Request $request)
     {
-
         try {
             $data = [];
             for ($i = 0; $i < count($request->name); $i++) {
@@ -110,7 +109,6 @@ class ProductController extends Controller
                     'updated_at' => now(),
                 ];
             }
-
             Product::insert($data);
             return response()->json('Successfully Data inserted', 200);
         } catch (\Exception $e) {

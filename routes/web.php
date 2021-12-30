@@ -28,11 +28,11 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('product_types', ProductTypeController::class)->except('show');
         Route::resource('categories', CategoryController::class)->except('show');
 
-        //print products
-        Route::get('/products/print',[ProductController::class,'printProduct'])->name('productPrinter');
+
         /**
          * Insert Multiple data to model Route
          */
+        Route::post('/inventory/load_category',[CategoryController::class,'loadCategoryByProductType'])->name('categoryByProductType');
 
         Route::get('product_types/multiple/create',[ProductTypeController::class,'createMultiple'])->name('product_types.multiple.create');
         Route::post('product_types/multiple/store',[ProductTypeController::class,'storeMultiple'])->name('product_types.multiple.store');

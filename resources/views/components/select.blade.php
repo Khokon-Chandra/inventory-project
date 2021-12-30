@@ -1,5 +1,4 @@
 @props(['name','label','data','valueType','editableData','optionLabel'])
-
 <div {{ $attributes->merge(["class"=>""]) }}>
    @isset($label)
    <label for="{{ $name }}">{{ $label }}</label>
@@ -17,3 +16,5 @@
     </select>
     <x-invalid-feedback attribute="{{ $name }}" />
 </div>
+
+

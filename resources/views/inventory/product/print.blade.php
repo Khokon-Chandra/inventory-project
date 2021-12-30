@@ -1,12 +1,11 @@
 <div class="d-none" id="print">
-   <div class="text-center">
-       <h3>Product List</h3>
-       <hr>
-       <h4>Search Criteria :{{ request('search')??'' }}</h4>
-   </div>
-    <table class="table table-sm table-striped">
+    <div class="text-center">
+        <h3>Product List</h3>
+        <hr>
+    </div>
+    <table class="customTable" border="1">
         <thead>
-            <tr class="bg-dark text-white">
+            <tr>
                 <th width="5%">SN</th>
                 <th with="10%">Category</th>
                 <th width="20%">Product Name</th>
@@ -36,9 +35,22 @@
             if ($('#print').length) {
                 $('#print').removeClass('d-none')
                 $('#print').printThis({
-                    importCSS: true,
-                    loadCSS: "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css",
-                    header: "<h1>Look at all of my kitties!</h1>"
+                    debug: false, // show the iframe for debugging
+                    importCSS: true, // import parent page css
+                    importStyle: false, // import style tags
+                    printContainer: true, // print outer container/$.selector
+                    loadCSS: "", // path to additional css file - use an array [] for multiple
+                    pageTitle: "", // add title to print page
+                    removeInline: true, // remove inline styles from print elements
+                    removeInlineSelector: "*", // custom selectors to filter inline styles. removeInline must be true
+                    printDelay: 333, // variable print delay
+
+                    doctypeString: '...', // enter a different doctype for older markup
+                    removeScripts: false, // remove script tags from print content
+                    copyTagClasses: false, // copy classes from the html & body tag
+                    beforePrintEvent: null, // function for printEvent in iframe
+                    beforePrint: 'before print', // function called before iframe is filled
+                    afterPrint: null // function called before iframe is removed
                 });
                 setTimeout(function() {
                     $('#print').addClass('d-none');

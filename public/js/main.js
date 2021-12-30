@@ -1,6 +1,26 @@
 
 
 $(document).ready(function () {
+
+    /**
+     *
+     * @returns load category
+     */
+    $('#product_type').change(function (event) {
+
+        axios.post(categoryUrl, { _key: $(this).val() })
+            .then((response) => {
+                const category = document.querySelector('#category');
+              category.innerHTML = `<select class="mb-3 selectpicker" name="category">${response.data.map(function (category) {
+                    return `<option value='${category.id}'>${category.name}</option>`;
+                }).join('')}</select>`
+
+            })
+            .catch((error) => {
+                toastr.error('something went wrong! Please try again');
+            })
+    })
+
     /**
      * select all checkbox by single button
      */
@@ -73,10 +93,10 @@ $(document).ready(function () {
      */
 
     $('#addRow').click(function () {
-        let row = ` <tr>
-            <td><input type="text class='form-control' name="name"></td>
-            <td><input type="text class="form-control" name="description"></td>
-            <td class="btn trash"><i class="fa fa-trash"></i></td>
+        let row = `<tr>
+            <td><input type="text" class="form-control" name="name"></td>
+            <td><input type="text" class="form-control" name="description"></td>
+            <td class="text-center trash"><i class="fa fa-trash"></i></td>
         </tr>`;
         document.querySelector('tbody').insertAdjacentHTML("beforeend", row);
     })

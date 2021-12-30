@@ -97,6 +97,18 @@ class CategoryController extends Controller
         }
     }
 
+
+    /**
+     * category by product type
+     */
+
+     public function loadCategoryByProductType(Request $request)
+     {
+        return Category::whereHas('productType',function($query) use($request){
+            $query->where('_key',$request->_key);
+        })->get();
+     }
+
     /**
      * Display the specified resource.
      *

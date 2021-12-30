@@ -8,10 +8,9 @@
                     <div class="row mb-3">
                         <x-select class="col-md-6" :name="__('product_type')" :label="__('Select Product Type')"
                             :valueType="__('_key')" :data="$productTypes" />
-                        <x-select class="col-md-6" :name="__('category_id')" :label="__('Select Category')"
-                            :valueType="__('id')" :data="$categories" />
+                        <div id="category"></div>
                     </div>
-                    <table class="table">
+                    <table class="customTable">
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -23,7 +22,7 @@
                             <tr>
                                 <td><input type="text" class="form-control" name="name"></td>
                                 <td><input type="text" class="form-control" name="description"></td>
-                                <td><span id="addRow"
+                                <td class="text-center"><span id="addRow"
                                         style="border-radius: 50%; border:1px solid rgba(44, 44, 44, 0.867); padding:4px;background:#cfd3e3"><i
                                             class="fa fa-plus"></i></span></td>
                             </tr>
@@ -45,12 +44,5 @@
             }
         </script>
         <script src="{{ asset('js/multiple_insert/product.js') }}"></script>
-
-        <script>
-            $('#product_type').change(function(event) {
-                var currentRoute = "{{ route('inventory.products.multiple.create') }}?product_type=" + $(this).val();
-                window.location.replace(currentRoute)
-            })
-        </script>
     @endpush
 </x-app-layout>
