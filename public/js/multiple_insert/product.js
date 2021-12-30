@@ -10,7 +10,7 @@ $('#insertMultiple').submit(function (event) {
         }
     });
     data['category_id'] = $('#category_id').val()??'';
-    console.log(data.product_type);
+
     if(data.product_type != ''){
         axios.post(this.action,data).then((response)=>{
             console.log(response.data);

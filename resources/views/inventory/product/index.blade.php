@@ -17,12 +17,9 @@
                 <thead>
                     <tr>
                         <th width="5%">SN</th>
-                        <th width="20%">Product Name</th>
                         <th with="10%">Category</th>
-                        <th width="10%">Quantity</th>
-                        <th width="10%">Unit Price</th>
-                        <th width="10%">Import Price</th>
-                        <th width="10%">Discount</th>
+                        <th width="20%">Product Name</th>
+                        <th width="40%">Description</th>
                         <th width="10%" class="text-center">Action</th>
                         <th width="5%"><input id="selectAll"  type="checkbox" value="false"></th>
                     </tr>
@@ -31,12 +28,10 @@
                     @forelse ($products as $product)
                         <tr>
                             <x-sn :iteration="$loop->iteration" />
-                            <td>{{ $product->name }}</td>
                             <td>{{ $product->category->name }}</td>
-                            <td>{{ $product->quantity }}</td>
-                            <td>$ {{ $product->unit_price }}</td>
-                            <td>$ {{ $product->import_price }}</td>
-                            <td>{{ $product->discount }} %</td>
+                            <td>{{ $product->name }}</td>
+                            <td>{{ Str::substr($product->description, 0, 35) }}</td>
+
                             <td class="text-center">
                                 <a class="btn btn-primary btn-sm" href="{{ route('inventory.products.edit',$product->_key) }}"><i class="align-middle me-2 far fa-fw fa-edit"></i> Edit</a>
                             </td>

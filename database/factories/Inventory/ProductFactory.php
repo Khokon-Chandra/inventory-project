@@ -21,7 +21,7 @@ class ProductFactory extends Factory
         return [
             '_key'=>Str::random(32),
             'category_id'=>rand(1,50),
-            'name'=>$this->faker->words(),
+            'name'=>$this->faker->word,
             'description'=>$this->faker->paragraph(5),
         ];
     }

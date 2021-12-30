@@ -88,7 +88,7 @@ class ProductController extends Controller
             for ($i = 0; $i < count($request->name); $i++) {
                 $data[] = [
                     '_key'=> Str::random(32),
-                    'category_id'=>$request->product_type,
+                    'category_id'=>$request->category_id,
                     'name' => $request->name[$i],
                     'description' => $request->description[$i],
                     'created_at' => now(),
