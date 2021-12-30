@@ -4,14 +4,12 @@
     <div class="card">
         <div class="card-body">
             <div class="d-flex justify-content-between mb-3">
-
                <x-search-product :productTypes="$productTypes" :categories="$categories" />
-                <a class="btn btn-info" href="{{ route('inventory.productPrinter') }}">Print</a>
+                <a id="printThis" class="btn btn-info" href="#">Print</a>
                 <div class="d-flex">
                    <x-add-new-dropdown :label="__('New product')" :single="route('inventory.products.create')" :multiple="route('inventory.products.multiple.create')" />
                     <button id="delete" class="btn btn-danger btn-sm mx-1" value="{{ route('inventory.products.deleteMultiple') }}">Delete</button>
                 </div>
-
             </div>
             <table class="table table-sm table-striped">
                 <thead>
@@ -42,9 +40,8 @@
                     @endforelse
                 </tbody>
             </table>
-
             {{ $products->links() }}
-
         </div>
     </div>
+    @include('inventory.product.print')
 </x-app-layout>
