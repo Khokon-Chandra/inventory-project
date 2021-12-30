@@ -6,14 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Laravel') }}</title>
+
+    {{-- icon image link --}}
     <link rel="shortcut icon" href="{{ asset('img/icons/icon-48x48.png') }}" />
+    {{-- style links --}}
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/bootstrap-select.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}" rel="stylesheet">
+    {{-- pre defined scripts --}}
     <script src="{{ asset('js/jquery-3.5.1.js') }}"></script>
-    @stack('styles')
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/axios.min.js') }}"></script>
+
+    @stack('styles')
 </head>
 
 <body>

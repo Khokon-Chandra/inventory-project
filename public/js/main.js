@@ -11,9 +11,13 @@ $(document).ready(function () {
         axios.post(categoryUrl, { _key: $(this).val() })
             .then((response) => {
                 const category = document.querySelector('#category');
-              category.innerHTML = `<select class="mb-3 selectpicker" name="category">${response.data.map(function (category) {
+              category.innerHTML = `<label for="selectCategory">Select category</label>
+              <select id="selectCategory" class="selectpicker form-control"  data-live-search="true">
+              <option value="">select an item</option>
+              ${response.data.map(function (category) {
                     return `<option value='${category.id}'>${category.name}</option>`;
                 }).join('')}</select>`
+                $('.selectpicker').selectpicker('refresh');
 
             })
             .catch((error) => {

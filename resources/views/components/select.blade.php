@@ -3,7 +3,7 @@
    @isset($label)
    <label for="{{ $name }}">{{ $label }}</label>
    @endisset
-    <select id="{{ $name }}" name="{{ $name }}" class="selectpicker select-control @error($name) is-invalid @enderror" data-live-search="true" data-width="fit" >
+    <select id="{{ $name }}" name="{{ $name }}" class="selectpicker select-control @error($name) is-invalid @enderror" data-live-search="true" >
         <option value="">{{ $optionLabel??'Select an item' }}</option>
         @foreach ($data as $item)
             <option

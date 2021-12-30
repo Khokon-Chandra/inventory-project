@@ -5,10 +5,10 @@
             <h4 class="card-header bg-primary text-white">Create Multiple Product:</h4>
             <div class="card-body">
                 <form id="insertMultiple" action="{{ route('inventory.products.multiple.store') }}" method="POST">
-                    <div class="row mb-3">
+                    <div class="mb-3 row">
                         <x-select class="col-md-6" :name="__('product_type')" :label="__('Select Product Type')"
                             :valueType="__('_key')" :data="$productTypes" />
-                        <div id="category"></div>
+                        <div id="category" class="col-md-6"></div>
                     </div>
                     <table class="customTable">
                         <thead>
@@ -46,3 +46,4 @@
         <script src="{{ asset('js/multiple_insert/product.js') }}"></script>
     @endpush
 </x-app-layout>
+
