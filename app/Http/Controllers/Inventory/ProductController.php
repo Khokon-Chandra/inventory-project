@@ -62,6 +62,47 @@ class ProductController extends Controller
         }
     }
 
+
+
+     /**
+     * Create multiple Data
+     */
+
+    public function createMultiple()
+    {
+        return view('inventory.product.create-multiple',[
+            'productTypes'=>ProductType::select('id','_key','name')->get(),
+            'categories' => Category::categoryFilter()->get(),
+        ]);
+    }
+
+    /**
+     * Store multiple category
+     */
+
+    public function storeMultiple(Request $request)
+    {
+
+        try {
+            $data = [];
+            for ($i = 0; $i < count($request->name); $i++) {
+                $data[] = [
+                    '_key'=> Str::random(32),
+                    'category_id'=>$request->product_type,
+                    'name' => $request->name[$i],
+                    'description' => $request->description[$i],
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ];
+            }
+
+            Product::insert($data);
+            return response()->json('Successfully Data inserted', 200);
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(), 500);
+        }
+    }
+
     /**
      * Display the specified resource.
      *

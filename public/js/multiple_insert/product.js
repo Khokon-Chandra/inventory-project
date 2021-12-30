@@ -1,8 +1,3 @@
-/**
- * submit form data
- */
-
-
 
 $('#insertMultiple').submit(function (event) {
     event.preventDefault();
@@ -14,7 +9,7 @@ $('#insertMultiple').submit(function (event) {
             }
         }
     });
-    data['product_type'] = $('#product_type').val()??'';
+    data['category_id'] = $('#category_id').val()??'';
     console.log(data.product_type);
     if(data.product_type != ''){
         axios.post(this.action,data).then((response)=>{
@@ -28,7 +23,7 @@ $('#insertMultiple').submit(function (event) {
             toastr.error('Something went wrong,Please try again');
         });
     }else{
-        toastr.warning('First Select ProductType');
+        toastr.warning('First Select ProductType and Then Category');
     }
 
 });

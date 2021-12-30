@@ -8,7 +8,7 @@
                <x-search-category :productTypes="$productTypes" />
 
                 <div class="d-flex">
-                    <a class="btn btn-primary mx-1" href="{{ route('inventory.categories.create') }}"><i class="fas fa-plus"></i> New category</a>
+                    <x-add-new-dropdown :label="__('New Category')" :single="route('inventory.categories.create')" :multiple="route('inventory.categories.multiple.create')" />
                     <button id="delete" class="btn btn-danger mx-1" value="{{ route('inventory.categories.deleteMultiple') }}">Delete</button>
                 </div>
 

@@ -28,5 +28,9 @@
             </div>
         </div>
     </div>
+
+    @push('scripts')
     <script>const data = { name: [], description: [] };</script>
+    <script src="{{ asset('js/multiple_insert/product_type.js') }}"></script>
+    @endpush
 </x-app-layout>

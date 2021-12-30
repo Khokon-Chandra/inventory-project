@@ -2,12 +2,14 @@
     <x-alert />
     <div class="col-md-8 offset-md-2">
         <div class="card ">
-            <h4 class="card-header bg-primary text-white">Create Multiple Product Type:</h4>
+            <h4 class="card-header bg-primary text-white">Create Multiple Product:</h4>
             <div class="card-body">
-                <form id="insertMultiple" action="{{ route('inventory.categories.multiple.store') }}" method="POST">
-                    <div class="text-center card p-3">
-                        <x-select :name="__('product_type')" :label="__('Select Product Type')"
-                            :valueType="__('id')" :data="$productTypes" />
+                <form id="insertMultiple" action="{{ route('inventory.products.multiple.store') }}" method="POST">
+                    <div class="row mb-3">
+                        <x-select class="col-md-6" :name="__('product_type')" :label="__('Select Product Type')"
+                            :valueType="__('_key')" :data="$productTypes" />
+                        <x-select class="col-md-6" :name="__('category_id')" :label="__('Select Category')"
+                            :valueType="__('id')" :data="$categories" />
                     </div>
                     <table class="table">
                         <thead>
@@ -34,13 +36,21 @@
             </div>
         </div>
     </div>
-    <script>
-        const data = {
-            name: [],
-            description: []
-        }
-    </script>
+
     @push('scripts')
-        <script src="{{ asset('js/multiple_insert/category.js') }}"></script>
+        <script>
+            const data = {
+                name: [],
+                description: []
+            }
+        </script>
+        <script src="{{ asset('js/multiple_insert/product.js') }}"></script>
+
+        <script>
+            $('#product_type').change(function(event) {
+                var currentRoute = "{{ route('inventory.products.multiple.create') }}?product_type=" + $(this).val();
+                window.location.replace(currentRoute)
+            })
+        </script>
     @endpush
 </x-app-layout>
