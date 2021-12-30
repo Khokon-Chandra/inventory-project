@@ -24,10 +24,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     // module name : inventory // Route group for inventory module
     Route::prefix('inventory')->name('inventory.')->group(function () {
-        Route::resource('products', ProductController::class);
+        Route::resource('products', ProductController::class)->except('show');
         Route::resource('product_types', ProductTypeController::class)->except('show');
-        Route::resource('categories', CategoryController::class);
+        Route::resource('categories', CategoryController::class)->except('show');
 
+        //print products
+        Route::get('/products/print',[ProductController::class,'printProduct'])->name('productPrinter');
         /**
          * Insert Multiple data to model Route
          */

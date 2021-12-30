@@ -31,6 +31,21 @@ class ProductController extends Controller
     }
 
     /**
+     * product printer
+     */
+
+     public function printProduct()
+     {
+        return view('inventory.product.print', [
+            'productTypes' => ProductType::select('id', '_key', 'name')->whereHas('products')->get(),
+            'categories' => Category::categoryFilter()->get(),
+            'products' => Product::with(['category'=>function($query){
+                $query->select('id','name');
+            }])->latest()->filter(request(['product_type', 'category', 'search']))->paginate(10),
+        ]);
+     }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="{{ asset('css/bootstrap-select.min.css') }}">
         <link rel="shortcut icon" href="{{ asset('img/icons/icon-48x48.png') }}" />
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        @stack('styles')
         <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}" rel="stylesheet">
         <script src="{{ asset('js/jquery-3.5.1.js') }}"></script>
 
