@@ -1,10 +1,12 @@
 $(document).ready(function () {
-    $('#product_type').change(function (event) {
-        axios.post(categoryUrl, { _key: $(this).val() })
+
+    const loadCategory = (product_type) => {
+        axios.post(categoryUrl, { _key: product_type })
             .then((response) => {
+                console.log(response.data);
                 const category = document.querySelector('#category');
                 category.innerHTML = `<label for="selectCategory">Select category</label>
-              <select id="selectCategory" class="selectpicker"  data-live-search="true">
+              <select id="selectCategory" class="selectpicker form-control"  data-live-search="true" data-style="border">
               <option value="">select an item</option>
               ${response.data.map(function (category) {
                     return `<option value='${category.id}'>${category.name}</option>`;
@@ -15,6 +17,14 @@ $(document).ready(function () {
             .catch((error) => {
                 toastr.error('something went wrong! Please try again');
             })
+    }
+
+    if ($('#product_type').val() !== "") {
+        loadCategory($('#product_type').val());
+    }
+
+    $('#product_type').change(function (event) {
+        loadCategory($(this).val());
     })
 
 

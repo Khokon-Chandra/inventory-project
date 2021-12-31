@@ -4,8 +4,8 @@
         <div class="card ">
             <div class="card-body">
                 <form id="insertMultiple" action="{{ route('inventory.products.multiple.store') }}" method="POST">
-                    <div class="mb-3 d-flex justify-content-between">
-                        <x-select  :name="__('product_type')" :label="__('Select Product Type')"
+                    <div class="row mb-3">
+                        <x-select class="col-md-6"  :name="__('product_type')" :label="__('Select Product Type')"
                             :valueType="__('_key')" :data="$productTypes" />
                         <div id="category" class="col-md-6"></div>
                     </div>
