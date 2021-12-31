@@ -17,7 +17,7 @@
     <script src="{{ asset('js/jquery-3.5.1.js') }}"></script>
     <script src="{{ asset('js/axios.min.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
-    @stack('scripts')
+
     @stack('styles')
 </head>
 
@@ -40,4 +40,5 @@
     <script src="{{ asset('js/bootstrap-select.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/toastr.min.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
+    @stack('scripts')
 </body>

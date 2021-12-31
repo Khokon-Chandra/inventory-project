@@ -25,8 +25,8 @@ class ProductController extends Controller
             'productTypes' => ProductType::select('id', '_key', 'name')->whereHas('products')->get(),
             'categories' => Category::categoryFilter()->get(),
             'products' => Product::with(['category'=>function($query){
-                $query->select('id','name');
-            }])->latest()->filter(request(['product_type', 'category', 'search']))->paginate(10),
+                $query->select('id','product_type_id','name');
+            },'productType'])->latest()->filter(request(['product_type', 'category', 'search']))->paginate(10),
         ]);
     }
 
@@ -170,9 +170,11 @@ class ProductController extends Controller
     {
         try {
             Product::where('_key', $_key)->delete();
-            return redirect()->route('inventory.products.index')->with('success', 'successfully product Deleted');
+            // return redirect()->route('inventory.products.index')->with('success', 'successfully product Deleted');
+            return response()->json('success',200);
         } catch (\Exeception $e) {
-            return back()->with('error', $e->getMessage());
+            return response()->json(false,500);
+            // return back()->with('error', $e->getMessage());
         }
     }
 

@@ -39,6 +39,18 @@ $(document).ready(function () {
      */
 
     /**
+     * sngle trash file
+     */
+     $('.singleTrash').click(function(event){
+        axios.delete($(this).data('link')).then((response)=>{
+            toastr.success('Successfully an item deleted !!');
+            $(this).closest('tr').remove();
+        }).catch((error)=>{
+            toastr.error('Sorry try again!');
+        })
+    })
+
+    /**
      * Multiple delete action goes here......
      */
 
