@@ -7,12 +7,11 @@ $(document).ready(function () {
      * @returns load category
      */
     $('#product_type').change(function (event) {
-
         axios.post(categoryUrl, { _key: $(this).val() })
             .then((response) => {
                 const category = document.querySelector('#category');
               category.innerHTML = `<label for="selectCategory">Select category</label>
-              <select id="selectCategory" class="selectpicker form-control"  data-live-search="true">
+              <select id="selectCategory" class="selectpicker"  data-live-search="true">
               <option value="">select an item</option>
               ${response.data.map(function (category) {
                     return `<option value='${category.id}'>${category.name}</option>`;
@@ -91,19 +90,6 @@ $(document).ready(function () {
     });
 
 
-
-    /**
-     * Insert multiple data
-     */
-
-    $('#addRow').click(function () {
-        let row = `<tr>
-            <td><input type="text" class="form-control" name="name"></td>
-            <td><input type="text" class="form-control" name="description"></td>
-            <td class="text-center trash"><i class="fa fa-trash"></i></td>
-        </tr>`;
-        document.querySelector('tbody').insertAdjacentHTML("beforeend", row);
-    })
     /**
      * remove form row
      */
