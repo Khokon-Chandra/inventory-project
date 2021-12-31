@@ -104,8 +104,8 @@ class CategoryController extends Controller
 
      public function loadCategoryByProductType(Request $request)
      {
-        return Category::whereHas('productType',function($query) use($request){
-            $query->where('_key',$request->_key);
+        return Category::select('id','product_type_id','name')->whereHas('productType',function($query) use($request){
+            $query->select('id')->where('_key',$request->_key);
         })->get();
      }
 
