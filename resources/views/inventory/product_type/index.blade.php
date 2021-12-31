@@ -6,7 +6,7 @@
             <div class="d-flex justify-content-between mb-3">
                 <x-search-product-type />
                 <div class="d-flex">
-                    <a href="{{ route('inventory.product_types.create') }}" class="btn btn-primary "><i class="fas fa-plus"></i> New Type</a>
+                    <a href="{{ route('inventory.product_types.multiple.create') }}" class="btn btn-primary "><i class="fas fa-plus"></i> New Type</a>
                     <button id="delete" class="btn btn-danger btn-sm mx-1" value="{{ route('inventory.product_types.deleteMultiple') }}">Delete</button>
                 </div>
 

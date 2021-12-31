@@ -30,25 +30,26 @@
     </table>
 </div>
 @push('scripts')
-    <script>
-        let category = $('#category').val() !== ''?$('#category option:selected').text():"";
-        let product_type = $('#product_type').val() !== ""?$("#product_type option:selected").text():"";
-        let criteria = [product_type,category,"{{ request('search')??'' }}"];
-        if(criteria.length>0){
-
-            $('#searchCriteria').html(`<b>Search criteria:</b>${criteria.join(' ')}`);
-        }
-    </script>
     <script src="{{ asset('js/printThis.js') }}"></script>
     <script>
-        $('#printThis').click(function() {
-            if ($('#print').length) {
-                $('#print').removeClass('d-none')
-                $('#print').printThis();
-                setTimeout(function() {
-                    $('#print').addClass('d-none');
-                }, 900);
+        $(document).ready(function() {
+            let category = $('#category').val() !== '' ? $('#category option:selected').text() : "";
+            let product_type = $('#product_type').val() !== "" ? $("#product_type option:selected").text() : "";
+            let criteria = [product_type, category, "{{ request('search') ?? '' }}"];
+            if (criteria.length > 0) {
+
+                $('#searchCriteria').html(`<b>Search criteria:</b>${criteria.join(' ')}`);
             }
+
+            $('#printThis').click(function() {
+                if ($('#print').length) {
+                    $('#print').removeClass('d-none')
+                    $('#print').printThis();
+                    setTimeout(function() {
+                        $('#print').addClass('d-none');
+                    }, 900);
+                }
+            })
         })
     </script>
 @endpush

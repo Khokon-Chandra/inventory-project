@@ -55,6 +55,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/agents/delete-many',[AgentController::class,'deleteMultiple'])->name('agents.deleteMultiple');
 });
 
-
+Route::fallback(function(){
+    return "<h1>404</h1><h2>Page not found</h2>";
+});
 
 require __DIR__ . '/auth.php';

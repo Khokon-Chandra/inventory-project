@@ -1,24 +1,22 @@
 <x-app-layout>
-    <x-alert />
-    <div class="col-md-8 offset-md-2">
+
+        <h4 class="mb-3">Create product type:</h4>
+
         <div class="card ">
-            <h4 class="card-header bg-primary text-white">Create Multiple Product Type:</h4>
             <div class="card-body">
-                <form  id="insertMultiple" action="{{ route('inventory.product_types.multiple.store') }}" method="POST">
-                    <table class="table">
+                <form id="insertMultiple" action="{{ route('inventory.product_types.multiple.store') }}" method="POST">
+                    <table class="customTable mb-3">
                         <thead>
                             <tr>
-                                <th>Name</th>
+                                <th>Product Type</th>
                                 <th>Description</th>
-                                <th>Action</th>
+                                <th class="text-center"><span id="addRow"
+                                    style="border-radius:50%;color:white; cursor: pointer; padding:4px;background:#383838"><i
+                                        class="fa fa-plus"></i></span></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><input type="text" class="form-control" name="name"></td>
-                                <td><input type="text" class="form-control" name="description"></td>
-                                <td><span id="addRow" style="border-radius: 50%; border:1px solid rgba(44, 44, 44, 0.867); padding:4px;background:#cfd3e3"><i class="fa fa-plus"></i></span></td>
-                            </tr>
+
                         </tbody>
                     </table>
                     <div class="mb-3 text-center">
@@ -27,10 +25,8 @@
                 </form>
             </div>
         </div>
-    </div>
-
     @push('scripts')
-    <script>const data = { name: [], description: [] };</script>
-    <script src="{{ asset('js/multiple_insert/product_type.js') }}"></script>
+        <script src="{{ asset('js/multiple_insert/product_type.js') }}"></script>
     @endpush
 </x-app-layout>
+

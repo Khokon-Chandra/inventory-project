@@ -1,31 +1,29 @@
 <x-app-layout>
     <x-alert />
 
-    <div class="col-md-8 offset-md-2">
+            <h4 class="mb-3">Create Multiple Category:</h4>
+
         <div class="card ">
-            <h4 class="card-header bg-primary text-white">Create Multiple Category:</h4>
             <div class="card-body">
                 <form id="insertMultiple" action="{{ route('inventory.categories.multiple.store') }}" method="POST">
-                    <div class="text-center card p-3">
-                        <x-select :name="__('product_type')" :label="__('Select Product Type')" :valueType="__('id')"
-                            :data="$productTypes" />
+                    <div class="mb-3 d-flex justify-content-between">
+                        <x-select  :name="__('product_type')" :label="__('Select Product Type')"
+                            :valueType="__('id')" :data="$productTypes" />
                     </div>
-                    <table class="customTable" cellspacing="0" cellpadding="10">
+
+                    <table class="customTable mb-3">
                         <thead>
                             <tr>
-                                <th>Name</th>
+                                <th>Product Type</th>
+                                <th>Category</th>
                                 <th>Description</th>
-                                <th>Action</th>
+                                <th class="text-center"><span id="addRow"
+                                    style="border-radius:50%;color:white; cursor: pointer; padding:4px;background:#383838"><i
+                                        class="fa fa-plus"></i></span></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><input type="text" class="form-control" name="name"></td>
-                                <td><input type="text" class="form-control" name="description"></td>
-                                <td class="text-center"><span id="addRow"
-                                        style="border-radius: 50%; border:1px solid rgba(44, 44, 44, 0.867); padding:4px;background:#cfd3e3"><i
-                                            class="fa fa-plus"></i></span></td>
-                            </tr>
+
                         </tbody>
                     </table>
                     <div class="mb-3 text-center">
@@ -34,14 +32,8 @@
                 </form>
             </div>
         </div>
-    </div>
-    <script>
-        const data = {
-            name: [],
-            description: []
-        }
-    </script>
     @push('scripts')
         <script src="{{ asset('js/multiple_insert/category.js') }}"></script>
     @endpush
 </x-app-layout>
+

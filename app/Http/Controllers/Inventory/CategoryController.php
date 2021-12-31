@@ -82,7 +82,7 @@ class CategoryController extends Controller
             for ($i = 0; $i < count($request->name); $i++) {
                 $data[] = [
                     '_key'=> Str::random(32),
-                    'product_type_id'=>$request->product_type,
+                    'product_type_id'=>$request->product_type_id[$i],
                     'name' => $request->name[$i],
                     'description' => $request->description[$i],
                     'created_at' => now(),
