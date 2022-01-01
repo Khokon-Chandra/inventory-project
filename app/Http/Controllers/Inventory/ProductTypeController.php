@@ -150,10 +150,9 @@ class ProductTypeController extends Controller
     {
         try {
             ProductType::where('_key', $_key)->delete();
-            return redirect()->route('inventory.product_types.index')
-                ->with('success', 'Successfullly product type deleted');
+            return response()->json('successfully deleted!!',200);
         } catch (\Execption $e) {
-            return response()->json(['data' => $e->getMessage(), 'code' => 500]);
+            return response()->json($e->getMessage(),200);
         }
     }
 

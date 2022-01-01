@@ -29,15 +29,19 @@
                     @forelse ($categories as $category)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <th>{{ $category->productType->name }}</th>
+                        <td>{{ $category->productType->name??'deleted' }}</td>
                         <td>{{ $category->name }}</td>
                         <td>{{ Str::substr($category->description, 0, 30) }}</td>
                         <td>{{ $category->created_at->format('d-m-Y') }}</td>
                         <td class="text-center">
-                            <a class="btn btn-primary btn-sm" href="{{ route('inventory.categories.edit', $category->_key) }}"><i class="align-middle me-2 far fa-fw fa-edit"></i> Edit</a>
+                            <a class="text-dark"
+                                href="{{ route('inventory.categories.edit', $category->_key) }}"><i
+                                    style="font-size: 18px;" class="align-middle me-2 far fa-fw fa-edit"></i></a>
+                            <a class="singleTrash btn text-dark"
+                                data-link="{{ route('inventory.categories.destroy', $category->_key) }}"><i
+                                    style="font-size: 18px;" class="align-middle me-2 fa fa-trash"></i></a>
                         </td>
                         <td> <input type="checkbox" value="{{ $category->_key }}"></td>
-
                         </tr>
                     @empty
                         <tr>

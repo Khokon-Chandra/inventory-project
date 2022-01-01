@@ -10,7 +10,7 @@
         class="form-control"
         placeholder="search here"></div>
     <div class="col-4 px-0">
-        <input type="submit" value="search" class="btn btn-outline-primary">
+        <input type="submit" value="search" class="btn border">
     </div>
 </form>
 

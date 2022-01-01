@@ -17,7 +17,7 @@
             @forelse ($products as $product)
                 <tr>
                     <x-sn :iteration="$loop->iteration" />
-                    <td>{{ $product->category->name }}</td>
+                    <td>{{ $product->category->name??'deleted' }}</td>
                     <td>{{ $product->name }}</td>
                     <td>{{ Str::substr($product->description, 0, 35) }}</td>
                 </tr>

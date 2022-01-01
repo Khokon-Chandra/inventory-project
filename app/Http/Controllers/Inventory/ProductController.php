@@ -24,9 +24,9 @@ class ProductController extends Controller
         return view('inventory.product.index', [
             'productTypes' => ProductType::select('id', '_key', 'name')->whereHas('products')->get(),
             'categories' => Category::categoryFilter()->get(),
-            'products' => Product::with(['category'=>function($query){
-                $query->select('id','product_type_id','name');
-            },'productType'])->latest()->filter(request(['product_type', 'category', 'search']))->paginate(10),
+            'products' => Product::with(['category' => function ($query) {
+                $query->select('id', 'product_type_id', 'name');
+            }, 'productType'])->latest()->filter(request(['product_type', 'category', 'search']))->paginate(10),
         ]);
     }
 
@@ -34,16 +34,16 @@ class ProductController extends Controller
      * product printer
      */
 
-     public function printProduct()
-     {
+    public function printProduct()
+    {
         return view('inventory.product.print', [
             'productTypes' => ProductType::select('id', '_key', 'name')->whereHas('products')->get(),
             'categories' => Category::categoryFilter()->get(),
-            'products' => Product::with(['category'=>function($query){
-                $query->select('id','name');
+            'products' => Product::with(['category' => function ($query) {
+                $query->select('id', 'name');
             }])->latest()->filter(request(['product_type', 'category', 'search']))->paginate(10),
         ]);
-     }
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -79,14 +79,14 @@ class ProductController extends Controller
 
 
 
-     /**
+    /**
      * Create multiple Data
      */
 
     public function createMultiple()
     {
-        return view('inventory.product.create-multiple',[
-            'productTypes'=>ProductType::select('id','_key','name')->get(),
+        return view('inventory.product.create-multiple', [
+            'productTypes' => ProductType::select('id', '_key', 'name')->get(),
             'categories' => Category::categoryFilter()->get(),
         ]);
     }
@@ -97,23 +97,19 @@ class ProductController extends Controller
 
     public function storeMultiple(Request $request)
     {
-        try {
-            $data = [];
-            for ($i = 0; $i < count($request->name); $i++) {
-                $data[] = [
-                    '_key'=> Str::random(32),
-                    'category_id'=>$request->category_id[$i],
-                    'name' => $request->name[$i],
-                    'description' => $request->description[$i],
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ];
-            }
-            Product::insert($data);
-            return response()->json('Successfully Data inserted', 200);
-        } catch (\Exception $e) {
-            return response()->json($e->getMessage(), 500);
+        $data = [];
+        for ($i = 0; $i < count($request->name); $i++) {
+            $data[] = [
+                '_key' => Str::random(32),
+                'category_id' => $request->category_id[$i],
+                'name' => $request->name[$i],
+                'description' => $request->description[$i],
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
         }
+        Product::insert($data);
+        return response()->json('Successfully Data inserted', 200);
     }
 
     /**
@@ -136,7 +132,7 @@ class ProductController extends Controller
     public function edit($_key)
     {
         return view('inventory.product.edit', [
-            'productTypes'=>ProductType::select('id','_key','name')->get(),
+            'productTypes' => ProductType::select('id', '_key', 'name')->get(),
             'categories' => Category::select('id', '_key', 'name')->get(),
             'product' => Product::where('_key', $_key)->firstOrFail(),
         ]);
@@ -151,13 +147,9 @@ class ProductController extends Controller
      */
     public function update(StoreProductRequest $request, $_key)
     {
-        try {
-            Product::where('_key', $_key)->update($request->validated());
-            return redirect()->route('inventory.products.index')
+        Product::where('_key', $_key)->update($request->validated());
+        return redirect()->route('inventory.products.index')
             ->with('success', 'successfully product Updated');
-        } catch (\Exeception $e) {
-            return back()->with('error', $e->getMessage());
-        }
     }
 
     /**
@@ -168,17 +160,15 @@ class ProductController extends Controller
      */
     public function destroy($_key)
     {
-        try {
-            Product::where('_key', $_key)->delete();
-            // return redirect()->route('inventory.products.index')->with('success', 'successfully product Deleted');
-            return response()->json('success',200);
-        } catch (\Exeception $e) {
-            return response()->json(false,500);
-            // return back()->with('error', $e->getMessage());
-        }
+
+        Product::where('_key', $_key)->delete();
+        // return redirect()->route('inventory.products.index')->with('success', 'successfully product Deleted');
+        return response()->json('success', 200);
     }
 
-
+    /**
+     * delete multiple products record
+     */
     public function deleteMultiple(Request $request)
     {
         try {
@@ -186,6 +176,19 @@ class ProductController extends Controller
             return response()->json(['data' => $request->data, 'code' => 200]);
         } catch (\Execption $e) {
             return response()->json(['data' => $e->getMessage(), 'code' => 500]);
+        }
+    }
+
+    /**
+     * restore deleted data instantly with undo button
+     */
+
+    public function restore(Request $request)
+    {
+        $record = Product::withTrashed()->where('_key', $request->_key)->firstOrFail();
+        if ($record && $record->trashed()) {
+            $record->restore();
+            return back()->with('success', 'Successfully product restored!!');
         }
     }
 }

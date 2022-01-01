@@ -28,6 +28,10 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('product_types', ProductTypeController::class)->except('show');
         Route::resource('categories', CategoryController::class)->except('show');
 
+        /**
+         * inventory restore route goes here
+         */
+        Route::post('/products/restore',[ProductController::class,'restore'])->name('products.restore');
 
         /**
          * Insert Multiple data to model Route

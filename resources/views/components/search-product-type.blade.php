@@ -4,5 +4,5 @@
         value="{{ request('search') }}"
         class="form-control"
         placeholder="search here"></div>
-    <div class="col-4 px-0"><input type="submit" class="btn btn-outline-primary" value="search"></div>
+    <div class="col-4 px-0"><input type="submit" class="btn border" value="search"></div>
 </form>

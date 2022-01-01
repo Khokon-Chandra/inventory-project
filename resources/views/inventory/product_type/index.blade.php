@@ -30,7 +30,12 @@
                             <td>{{ Str::substr($productType->description, 0, 50) }}</td>
                             <td>{{ $productType->created_at->format('d-m-Y') }}</td>
                             <td class="text-center">
-                                <a class="btn btn-primary btn-sm" href="{{ route('inventory.product_types.edit',$productType->_key) }}"><i class="align-middle me-2 far fa-fw fa-edit"></i> Edit</a>
+                                <a class="text-dark"
+                                    href="{{ route('inventory.product_types.edit', $productType->_key) }}"><i
+                                        style="font-size: 18px;" class="align-middle me-2 far fa-fw fa-edit"></i></a>
+                                <a class="singleTrash btn text-dark px-1"
+                                    data-link="{{ route('inventory.product_types.destroy', $productType->_key) }}"><i
+                                        style="font-size: 18px;" class="align-middle me-2 fa fa-trash"></i></a>
                             </td>
                             <td> <input type="checkbox" value="{{ $productType->_key }}"></td>
                         </tr>
@@ -40,7 +45,7 @@
                 </tbody>
             </table>
 
-            {{-- {{ $productTypes->links() }} --}}
+            {{ $productTypes->links() }}
 
         </div>
     </div>

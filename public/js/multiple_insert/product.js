@@ -12,7 +12,6 @@ $(document).ready(function () {
                     return `<option value='${category.id}'>${category.name}</option>`;
                 }).join('')}</select>`
                 $('.selectpicker').selectpicker('refresh');
-
             })
             .catch((error) => {
                 toastr.error('something went wrong! Please try again');

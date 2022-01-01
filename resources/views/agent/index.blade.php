@@ -21,7 +21,7 @@
             </div>
             <table class="table table-sm table-striped">
                 <thead>
-                    <tr class="bg-dark text-white">
+                    <tr>
                         <th width="5%">SN</th>
                         <th width="10%">Name</th>
                         <th width="10%">Mobile</th>

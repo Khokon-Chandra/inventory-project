@@ -163,10 +163,9 @@ class CategoryController extends Controller
     {
         try{
             Category::where('_key',$_key)->delete();
-            return redirect()->route('inventory.categories.index')
-            ->with('success', 'Successfullly category deleted');
+            return response()->json('success',200);
         }catch(\Exception $e){
-            return back()->with('error', $e->getMessage());
+            return response()->json($e->getMessage(),500);
         }
     }
 

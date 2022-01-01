@@ -1,6 +1,9 @@
 
 $(document).ready(function () {
 
+    $(".alert-success").fadeTo(5000, 500).slideUp(500, function () {
+        $(".alert-success").slideUp(500);
+    });
     /**
      * select all checkbox by single button
      */
@@ -41,13 +44,15 @@ $(document).ready(function () {
     /**
      * sngle trash file
      */
-     $('.singleTrash').click(function(event){
-        axios.delete($(this).data('link')).then((response)=>{
-            toastr.success('Successfully an item deleted !!');
-            $(this).closest('tr').remove();
-        }).catch((error)=>{
-            toastr.error('Sorry try again!');
-        })
+    $('.singleTrash').click(function (event) {
+        if (confirm("Are you sure to delete it ?")) {
+            axios.delete($(this).data('link')).then((response) => {
+                toastr.success('Successfully an item deleted !!');
+                $(this).closest('tr').remove();
+            }).catch((error) => {
+                toastr.error('Sorry try again!');
+            })
+        }
     })
 
     /**
@@ -57,28 +62,25 @@ $(document).ready(function () {
     $('#delete').click(function (event) {
         let url = this.value;
         let checkboxs = $('tbody').find($(':checkbox'));
+        let checkedBoxs = [];
         var keys = [];
         $.each(checkboxs, function (index, value) {
             if ($(value).prop('checked')) {
                 keys[index] = $(value).val();
+                checkedBoxs.push(value.closest('tr'));
             }
         });
 
-        if (keys.length > 0) {
+        if (keys.length > 0 && confirm('Are you sure to delete?')) {
+            $(checkedBoxs).remove();
             axios.post(url, { data: keys })
                 .then((response) => {
-                    if (response.status == 200) {
-                        toastr.success('Successfully Deleted !!');
-                        location.reload();
-                        console.log(response.data);
-                    }
+                    toastr.success('Successfully Deleted !!');
                 }).catch((error) => {
                     toastr.error('Deletation faild,Please try again');
                 });
         }
     });
-
-
     /**
      * remove form row
      */

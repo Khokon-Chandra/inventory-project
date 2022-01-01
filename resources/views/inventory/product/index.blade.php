@@ -10,7 +10,7 @@
                     <button id="printThis" class="btn btn-info mx-1">Print</button>
                     <x-add-new-dropdown :label="__('New product')" :single="route('inventory.products.create')"
                         :multiple="route('inventory.products.multiple.create')" />
-                    <button id="delete" class="btn btn-danger btn-sm mx-1"
+                    <button id="delete" class="btn btn-danger mx-1"
                         value="{{ route('inventory.products.deleteMultiple') }}">Delete</button>
                 </div>
             </div>
@@ -30,18 +30,18 @@
                     @forelse ($products as $product)
                         <tr>
                             <x-sn :iteration="$loop->iteration" />
-                                <td>{{ $product->productType->name }}</td>
-                            <td>{{ $product->category->name }}</td>
+                            <td>{{ $product->productType->name ?? 'deleted' }}</td>
+                            <td>{{ $product->category->name ?? 'deleted' }}</td>
                             <td>{{ $product->name }}</td>
                             <td>{{ Str::substr($product->description, 0, 35) }}</td>
 
                             <td class="text-center">
-                                <a class="text-dark"
+                                <a class="btn btn-primary btn-sm"
                                     href="{{ route('inventory.products.edit', $product->_key) }}"><i
-                                        style="font-size: 18px;" class="align-middle me-2 far fa-fw fa-edit"></i></a>
-                                <a class="singleTrash btn text-dark"
+                                        class="align-middle me-2 far fa-fw fa-edit"></i></a>
+                                <button type="button" class="singleTrash btn btn-danger btn-sm"
                                     data-link="{{ route('inventory.products.destroy', $product->_key) }}"><i
-                                        style="font-size: 18px;" class="align-middle me-2 fa fa-trash"></i></a>
+                                        class="align-middle me-2 fa fa-trash"></i></button>
                             </td>
                             <td> <input type="checkbox" value="{{ $product->_key }}"></td>
                         </tr>
@@ -55,5 +55,25 @@
             {{ $products->links() }}
         </div>
     </div>
+    @push('scripts')
+        <script src="{{ asset('js/table.js') }}"></script>
+    @endpush
     @include('inventory.product.print')
 </x-app-layout>
+
+
+{{-- <nav>
+    <ul class="pagination">
+    <li class="page-item disabled" aria-disabled="true" aria-label="« Previous">
+        <span class="page-link" aria-hidden="true">‹</span>
+    </li>
+    <li class="page-item active" aria-current="page"><span class="page-link">1</span></li>
+    <li class="page-item disabled" aria-disabled="true"><span class="page-link">...</span></li>
+
+    <li class="page-item"><a class="page-link" href="http://127.0.0.1:8000/inventory/products?page=15">15</a>
+    </li>
+    <li class="page-item">
+        <a class="page-link" href="http://127.0.0.1:8000/inventory/products?page=2" rel="next"
+            aria-label="Next »">›</a>
+    </li>
+</nav> --}}
