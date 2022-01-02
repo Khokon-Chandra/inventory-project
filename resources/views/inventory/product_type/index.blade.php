@@ -9,45 +9,22 @@
                     <a href="{{ route('inventory.product_types.multiple.create') }}" class="btn btn-primary "><i class="fas fa-plus"></i> New Type</a>
                     <button id="delete" class="btn btn-danger btn-sm mx-1" value="{{ route('inventory.product_types.deleteMultiple') }}">Delete</button>
                 </div>
-
             </div>
-            <table id="product_types" class="table table-sm table-striped">
-                <thead>
-                    <tr>
-                        <th width="5%">SN</th>
-                        <th width="20%">Name</th>
-                        <th width="30%">Description</th>
-                        <th width="10%">Date</th>
-                        <th width="10%" class="text-center">Action </th>
-                        <th width="5%"><input id="selectAll"  type="checkbox" value="false"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse ($productTypes as $productType)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $productType->name }}</td>
-                            <td>{{ Str::substr($productType->description, 0, 50) }}</td>
-                            <td>{{ $productType->created_at->format('d-m-Y') }}</td>
-                            <td class="text-center">
-                                <a class="text-dark"
-                                    href="{{ route('inventory.product_types.edit', $productType->_key) }}"><i
-                                        style="font-size: 18px;" class="align-middle me-2 far fa-fw fa-edit"></i></a>
-                                <a class="singleTrash btn text-dark px-1"
-                                    data-link="{{ route('inventory.product_types.destroy', $productType->_key) }}"><i
-                                        style="font-size: 18px;" class="align-middle me-2 fa fa-trash"></i></a>
-                            </td>
-                            <td> <input type="checkbox" value="{{ $productType->_key }}"></td>
-                        </tr>
-                        @empty
-                        <tr><td colspan="6" class="text-center">No records found</td></tr>
-                    @endforelse
-                </tbody>
+            <table class="table table-sm table-striped">
+
             </table>
-
-            {{ $productTypes->links() }}
-
         </div>
     </div>
-
+@push('scripts')
+    <script>
+        const api_url  = "{{ route('product_types.index') }}";
+        const thead = [
+            {data:'sn', fieldName:'SN'},
+            {data:'name',fieldName:'Product type'},
+            {data:'description',fieldName:'Description', len:30},
+            {data:'created_at',fieldName:'Date'}
+        ];
+    </script>
+    <script src="{{ asset('js/table.js') }}"></script>
+@endpush
 </x-app-layout>

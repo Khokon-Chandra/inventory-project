@@ -17,7 +17,7 @@ class ProductTypeController extends Controller
      */
     public function index()
     {
-        return ProductType::all();
+        return ProductType::paginate(10);
     }
 
     /**
