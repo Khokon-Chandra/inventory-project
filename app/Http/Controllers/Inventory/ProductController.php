@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Inventory;
 
+use App\Exports\ProductExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductRequest;
 use App\Models\Inventory\Category;
@@ -9,6 +10,7 @@ use App\Models\Inventory\Product;
 use App\Models\Inventory\ProductType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
 {
@@ -190,5 +192,13 @@ class ProductController extends Controller
             $record->restore();
             return back()->with('success', 'Successfully product restored!!');
         }
+    }
+
+    /**
+     * products export @method::
+     */
+    public function export()
+    {
+        return Excel::download(new ProductExport,'products.xlsx');
     }
 }

@@ -51,6 +51,10 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/categories/delete-many',[CategoryController::class,'deleteMultiple'])->name('categories.deleteMultiple');
         Route::post('/products/delete-many',[ProductController::class,'deleteMultiple'])->name('products.deleteMultiple');
 
+        /**
+         * inventory export import route here
+         */
+        Route::get('/products/export',[ProductController::class,'export'])->name('products.export');
     });
     /**
      * agent modiule route goes here
